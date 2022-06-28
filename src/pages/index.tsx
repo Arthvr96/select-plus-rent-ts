@@ -1,23 +1,44 @@
 import React from 'react';
-import styled from 'styled-components';
+import Hero from 'components/organisms/Hero/Hero';
+import { graphql } from 'gatsby';
+import { HeroSlides } from 'globalTypes';
 
-const Wrapper = styled.section`
-  width: 100vw;
-  height: 100vh;
+interface IIndexData {
+  data: {
+    heroSlides: HeroSlides;
+  };
+}
 
-  h1 {
-    font-size: ${({ theme }) => theme.fontSize.title1};
-    color: ${({ theme }) => theme.colors.text.black};
-    font-weight: ${({ theme }) => theme.fontWeight.light};
+const Index = ({ data: { heroSlides } }: IIndexData) => {
+  return <Hero slidersData={heroSlides} />;
+};
+
+export const query = graphql`
+  query {
+    heroSlides: allContentfulHeroSlider {
+      slides: nodes {
+        id
+        title
+        subtitle
+        slideImage {
+          gatsbyImageData(width: 1920, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          alt: description
+        }
+      }
+    }
+    cars: allContentfulCars {
+      nodes {
+        id
+        carName
+        shortDescription
+        info
+        prices
+        gallery {
+          gatsbyImageData(width: 1920, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+        }
+      }
+    }
   }
 `;
-
-const Index = () => {
-  return (
-    <Wrapper>
-      <h1>Hello world</h1>
-    </Wrapper>
-  );
-};
 
 export default Index;
