@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { Helmet } from 'react-helmet';
 import IndexContextProvider from 'providers/IndexContextProvider';
 
 interface IIndexTemplate {
@@ -6,7 +7,12 @@ interface IIndexTemplate {
 }
 
 const IndexTemplate = ({ children }: IIndexTemplate) => {
-  return <IndexContextProvider>{children}</IndexContextProvider>;
+  return (
+    <>
+      <Helmet title="Select+Rent" defer={false} />
+      <IndexContextProvider>{children}</IndexContextProvider>
+    </>
+  );
 };
 
 export default IndexTemplate;

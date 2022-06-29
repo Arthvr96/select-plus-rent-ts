@@ -9,3 +9,7 @@ declare module '*.svg' {
   const content: string;
   export default content;
 }
+
+declare module 'react-helmet' {
+  export function Helmet({ title, defer }: { title: string; defer: boolean });
+}
