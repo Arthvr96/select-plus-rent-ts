@@ -5,6 +5,7 @@ import { HeroSlides } from 'globalTypes';
 import IndexTemplate from 'components/templates/IndexTemplate/IndexTemplate';
 import NavBar from 'components/organisms/NavBar/NavBar';
 import Hero from 'components/organisms/Hero/Hero';
+import FeaturesList from 'components/organisms/FeaturesList/FeaturesList';
 
 interface IIndexData {
   data: {
@@ -23,6 +24,7 @@ const Index = ({ data: { heroSlides } }: IIndexData) => {
     <IndexTemplate>
       <NavBar />
       <Hero id="home" slidersData={heroSlides} />
+      <FeaturesList />
       <El id="offer" bg={'red'} />
       <El id="services" bg={'green'} />
       <El id="contact" bg={'purple'} />
