@@ -22,6 +22,7 @@ export const Button = styled.button<HamburgerButton>`
   height: 5.5rem;
   background-color: transparent;
   border: none;
+  text-indent: -999rem;
 
   div {
     position: relative;

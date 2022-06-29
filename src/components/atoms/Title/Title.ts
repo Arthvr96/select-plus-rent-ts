@@ -6,7 +6,7 @@ interface ITitleTypes {
   color?: 'white' | 'black';
   margin?: string;
   padding?: string;
-  as: string;
+  as: 'h2' | 'h3' | 'h4';
 }
 
 export const Title = styled.h2<ITitleTypes>`

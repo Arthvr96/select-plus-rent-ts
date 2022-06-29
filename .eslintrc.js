@@ -32,7 +32,7 @@ module.exports = {
       },
     },
     {
-      files: ['gatsby-browser.ts', 'gatsby-ssr.js', '*.styles.*'],
+      files: ['gatsby-browser.js', 'gatsby-ssr.js', '*.styles.*'],
       rules: {
         'react/jsx-filename-extension': 'off',
       },

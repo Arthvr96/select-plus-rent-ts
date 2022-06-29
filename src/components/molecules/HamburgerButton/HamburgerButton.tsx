@@ -8,7 +8,8 @@ interface IHamburgerButton {
 
 const HamburgerButton = ({ isOpen, toggleHamburger }: IHamburgerButton) => {
   return (
-    <Button isOpen={isOpen} onClick={toggleHamburger}>
+    <Button type="button" isOpen={isOpen} onClick={toggleHamburger}>
+      Hambrguer button
       <div />
     </Button>
   );

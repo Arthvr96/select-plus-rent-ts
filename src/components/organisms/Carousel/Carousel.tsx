@@ -104,8 +104,22 @@ const Carousel = ({ slidersData, settings }: ICarouselProps) => {
 
   return (
     <CarouselWrapper>
-      <ButtonSlider tabIndex={0} onClick={() => changeSlide('left')} direction={'left'} />
-      <ButtonSlider tabIndex={0} onClick={() => changeSlide('right')} direction={'right'} />
+      <ButtonSlider
+        type="button"
+        tabIndex={0}
+        onClick={() => changeSlide('left')}
+        direction={'left'}
+      >
+        Previous slide
+      </ButtonSlider>
+      <ButtonSlider
+        type="button"
+        tabIndex={0}
+        onClick={() => changeSlide('right')}
+        direction={'right'}
+      >
+        Next slide
+      </ButtonSlider>
       <Slider ref={sliderRef}>
         {slidersData.slides.map(({ id, title, subtitle, slideImage: { alt, gatsbyImageData } }) => (
           <CarouselSlide

@@ -17,7 +17,7 @@ export const Slider = styled.div`
 
 type ButtonSliderDirection = { direction: 'left' | 'right' };
 
-export const ButtonSlider = styled.div<ButtonSliderDirection>`
+export const ButtonSlider = styled.button<ButtonSliderDirection>`
   position: absolute;
   top: 50%;
   z-index: 1000;
@@ -29,6 +29,7 @@ export const ButtonSlider = styled.div<ButtonSliderDirection>`
   background: url(${arrow}) 50% 50% transparent no-repeat;
   border: none;
   cursor: pointer;
+  text-indent: -999rem;
 
   &:hover,
   &:active {

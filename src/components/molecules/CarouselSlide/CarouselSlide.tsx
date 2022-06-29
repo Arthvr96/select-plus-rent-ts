@@ -12,16 +12,10 @@ const CarouselSlide = ({
   return (
     <Slide>
       <SlideContentWrapper>
-        <Title size={'title4'} as={'h2'} color={'white'}>
+        <Title as="h2" size="title4" color="white">
           {title}
         </Title>
-        <Subtitle
-          size={'subtitle4'}
-          as={'h3'}
-          color={'white'}
-          margin={'1.5rem 0 0 0'}
-          weight="regular"
-        >
+        <Subtitle as="h3" size="subtitle4" color="white" margin="1.5rem 0 0 0" weight="regular">
           {subtitle}
         </Subtitle>
       </SlideContentWrapper>
