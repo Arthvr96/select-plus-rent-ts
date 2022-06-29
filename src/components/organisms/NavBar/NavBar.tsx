@@ -6,11 +6,11 @@ import HamburgerMenu from 'components/organisms/HamburgerMenu/HamburgerMenu';
 import { NavBarWrapper } from './NavBar.style';
 
 const NavBar = () => {
-  const { isHamburgerOpen, handleToggleHamburger } = useIndexContext();
+  const { isHamburgerOpen, handleToggleHamburger, isNavHidden } = useIndexContext();
 
   return (
     <>
-      <NavBarWrapper showShadow={!isHamburgerOpen}>
+      <NavBarWrapper isHidden={isNavHidden} showShadow={!isHamburgerOpen}>
         <Logo type="withLinkPrimary" />
         <HamburgerButton isOpen={isHamburgerOpen} toggleHamburger={handleToggleHamburger} />
       </NavBarWrapper>

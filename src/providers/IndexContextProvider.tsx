@@ -1,4 +1,5 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 interface IIndexContextProvider {
   children: ReactNode;
@@ -6,6 +7,7 @@ interface IIndexContextProvider {
 
 interface IUseIndexContext {
   isHamburgerOpen: boolean;
+  isNavHidden: boolean;
   handleToggleHamburger: () => void;
 }
 
@@ -17,7 +19,16 @@ export const useIndexContext = (): IUseIndexContext => {
 
 const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   const [isHamburgerOpen, setHamburger] = useState(false);
+  const [isNavHidden, setNav] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      const isHide = currPos.y < prevPos.y && currPos.y < -100 && !isHamburgerOpen;
+      if (isHide !== isNavHidden) setNav(isHide);
+    },
+    [isNavHidden, isHamburgerOpen]
+  );
 
   const handleToggleHamburger = () => {
     setHamburger(!isHamburgerOpen);
@@ -36,7 +47,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     }
   }, [isHamburgerOpen]);
 
-  const values = { isHamburgerOpen, handleToggleHamburger };
+  const values = { isHamburgerOpen, handleToggleHamburger, isNavHidden };
 
   return <IndexContext.Provider value={values}>{children}</IndexContext.Provider>;
 };
