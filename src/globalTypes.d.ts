@@ -1,12 +1,14 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 
+interface ICarouselSlide {
+  id: string;
+  title: string;
+  subtitle: string;
+  slideImage: { alt: string; gatsbyImageData: IGatsbyImageData };
+}
+
 type HeroSlides = {
-  slides: {
-    id: string;
-    title: string;
-    subtitle: string;
-    slideImage: { alt: string; gatsbyImageData: IGatsbyImageData };
-  }[];
+  slides: ICarouselSlide[];
 };
 
 const EaseNames = {

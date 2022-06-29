@@ -16,12 +16,14 @@ export const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
   body {
     margin: 0;
     font-size: 1.6rem;
     overflow-x: hidden;
+    
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -1,16 +1,15 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
-type SubtitleTypes = {
-  theme: DefaultTheme;
+interface ISubtitleTypes {
   size: 'subtitle1' | 'subtitle2' | 'subtitle3' | 'subtitle4' | 'subtitle5';
   weight?: 'bold' | 'regular' | 'light';
   color?: 'white' | 'black';
   margin?: string;
   padding?: string;
   as: string;
-};
+}
 
-export const Subtitle = styled.h3<SubtitleTypes>`
+export const Subtitle = styled.h3<ISubtitleTypes>`
   font-size: ${({ theme, size }) => theme.fontSize[size]};
   font-weight: ${({ theme, weight = 'light' }) => theme.fontWeight[weight]};
   color: ${({ theme, color = 'black' }) => theme.colors.text[color]};

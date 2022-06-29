@@ -1,28 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { debounce } from 'lodash';
 import { ICarouselProps } from 'globalTypes';
-import { Title } from 'components/atoms/Title/Title';
-import { Subtitle } from 'components/atoms/Subtitle/Subtitle';
-import {
-  CarouselWrapper,
-  Slider,
-  ButtonSlider,
-  StyledImg,
-  Slide,
-  SlideContentWrapper,
-} from './Carousel.style';
+import CarouselSlide from 'components/molecules/CarouselSlide/CarouselSlide';
+import { CarouselWrapper, Slider, ButtonSlider } from './Carousel.style';
 
-const Carousel = ({
-  slidersData,
-  settings: { animationDuration, animationDelay, easingAnimation },
-}: ICarouselProps) => {
+const Carousel = ({ slidersData, settings }: ICarouselProps) => {
+  const { animationDuration, animationDelay, easingAnimation } = settings;
+  const firstSlide = slidersData.slides[0];
+
   const [moveBy, setMoveBy] = useState(0);
   const [delayInfinityLoop, setDelayInfinityLoop] = useState(animationDelay);
-  const sliderRef = useRef<HTMLDivElement>(null);
 
-  const changeSlide = (direction: 'left' | 'right') => {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  let interval: number;
+
+  const changeSlide = debounce((direction: 'left' | 'right') => {
     if (sliderRef.current) {
+      window.clearInterval(interval);
       const sliderEl = sliderRef.current;
       const maxMoveBy = (sliderEl.children.length - 1) * 100;
+
+      const timeOut = (value: number) => {
+        sliderEl.style.transitionDuration = `${animationDuration}ms`;
+        setMoveBy(value);
+      };
+
       if (direction === 'left') {
         if (moveBy !== 0) {
           if (delayInfinityLoop === animationDuration) {
@@ -32,6 +34,10 @@ const Carousel = ({
             sliderEl.style.transitionDuration = `${animationDuration}ms`;
           }
           setMoveBy(moveBy - 100);
+        } else {
+          sliderEl.style.transitionDuration = `0ms`;
+          setMoveBy(maxMoveBy);
+          window.setTimeout(() => timeOut(maxMoveBy - 100), 0);
         }
       } else if (direction === 'right') {
         if (moveBy !== maxMoveBy) {
@@ -42,14 +48,17 @@ const Carousel = ({
             sliderEl.style.transitionDuration = `${animationDuration}ms`;
           }
           setMoveBy(moveBy + 100);
+        } else {
+          sliderEl.style.transitionDuration = `0ms`;
+          setMoveBy(0);
+          window.setTimeout(() => timeOut(100), 0);
         }
       }
     }
-  };
+  }, animationDuration);
 
   useEffect(() => {
-    //necessary for infinite loop
-    slidersData.slides.push({ ...slidersData.slides[0], id: `${slidersData.slides[0].id}copy` });
+    //init settings for infinite loop
     if (sliderRef.current) {
       sliderRef.current.style.transitionDuration = `${animationDuration}ms`;
       sliderRef.current.style.transitionTimingFunction = `${easingAnimation}`;
@@ -58,7 +67,6 @@ const Carousel = ({
 
   useEffect(() => {
     // infinite loop
-    let interval: number;
 
     if (sliderRef.current) {
       const sliderEl = sliderRef.current;
@@ -100,24 +108,20 @@ const Carousel = ({
       <ButtonSlider tabIndex={0} onClick={() => changeSlide('right')} direction={'right'} />
       <Slider ref={sliderRef}>
         {slidersData.slides.map(({ id, title, subtitle, slideImage: { alt, gatsbyImageData } }) => (
-          <Slide key={id}>
-            <SlideContentWrapper>
-              <Title size={'title4'} as={'h2'} color={'white'}>
-                {title}
-              </Title>
-              <Subtitle
-                size={'subtitle4'}
-                as={'h3'}
-                color={'white'}
-                margin={'1.5rem 0 0 0'}
-                weight="regular"
-              >
-                {subtitle}
-              </Subtitle>
-            </SlideContentWrapper>
-            <StyledImg alt={alt} image={gatsbyImageData} />
-          </Slide>
+          <CarouselSlide
+            key={id}
+            id={id}
+            title={title}
+            subtitle={subtitle}
+            slideImage={{ alt, gatsbyImageData }}
+          />
         ))}
+        <CarouselSlide
+          id={firstSlide.id}
+          title={firstSlide.title}
+          subtitle={firstSlide.subtitle}
+          slideImage={firstSlide.slideImage}
+        />
       </Slider>
     </CarouselWrapper>
   );

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import arrow from 'assets/svg/slider/arrow_slider.svg';
-import { GatsbyImage } from 'gatsby-plugin-image';
 
 export const CarouselWrapper = styled.div`
   position: relative;
@@ -35,26 +34,4 @@ export const ButtonSlider = styled.div<ButtonSliderDirection>`
   &:active {
     background-color: rgba(49, 49, 49, 0.1);
   }
-`;
-
-export const Slide = styled.div`
-  position: relative;
-`;
-
-export const StyledImg = styled(GatsbyImage)`
-  width: 100vw;
-  height: 100%;
-`;
-
-export const SlideContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 1000;
-  top: 0;
-  left: 0;
 `;

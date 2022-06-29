@@ -1,19 +1,21 @@
 import React from 'react';
-import Carousel from 'components/organisms/Carousel/Carousel';
 import { HeroSlides } from 'globalTypes';
+import Carousel from 'components/organisms/Carousel/Carousel';
+import { Wrapper } from './Hero.style';
 
 interface IHeroType {
   slidersData: HeroSlides;
+  id: string;
 }
 
-const Hero = ({ slidersData }: IHeroType) => {
+const Hero = ({ slidersData, id }: IHeroType) => {
   return (
-    <div>
+    <Wrapper id={id}>
       <Carousel
         slidersData={slidersData}
         settings={{ animationDuration: 400, animationDelay: 3500, easingAnimation: 'ease-in-out' }}
       />
-    </div>
+    </Wrapper>
   );
 };
 

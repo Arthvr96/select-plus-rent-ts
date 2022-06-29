@@ -1,16 +1,15 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 
-type TitleTypes = {
-  theme: DefaultTheme;
+interface ITitleTypes {
   size: 'title1' | 'title2' | 'title3' | 'title4' | 'title5' | 'title6';
   weight?: 'heavy' | 'bold' | 'regular';
   color?: 'white' | 'black';
   margin?: string;
   padding?: string;
   as: string;
-};
+}
 
-export const Title = styled.h2<TitleTypes>`
+export const Title = styled.h2<ITitleTypes>`
   font-size: ${({ theme, size }) => theme.fontSize[size]};
   font-weight: ${({ theme, weight = 'bold' }) => theme.fontWeight[weight]};
   color: ${({ theme, color = 'black' }) => theme.colors.text[color]};
