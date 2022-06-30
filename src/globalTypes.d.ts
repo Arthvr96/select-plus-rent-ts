@@ -26,12 +26,6 @@ type CarsData = {
   cars: ICar[];
 };
 
-type InfoBg = {
-  img: {
-    gatsbyImageData: IGatsbyImageData;
-  };
-};
-
 const EaseNames = {
   Ease: 'ease',
   EaseIn: 'ease-in',

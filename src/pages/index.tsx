@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { CarsData, HeroSlides, InfoBg } from 'globalTypes';
+import { CarsData, HeroSlides } from 'globalTypes';
 import IndexTemplate from 'components/templates/IndexTemplate/IndexTemplate';
 import NavBar from 'components/organisms/NavBar/NavBar';
 import Hero from 'components/organisms/Hero/Hero';
@@ -14,11 +14,13 @@ interface IIndexData {
   data: {
     heroSlides: HeroSlides;
     carsData: CarsData;
-    infoBg: InfoBg;
+    infoSectionBg: {
+      publicURL: string;
+    };
   };
 }
 
-const Index = ({ data: { heroSlides, carsData, infoBg } }: IIndexData) => {
+const Index = ({ data: { heroSlides, carsData, infoSectionBg } }: IIndexData) => {
   return (
     <IndexTemplate>
       <NavBar />
@@ -26,7 +28,7 @@ const Index = ({ data: { heroSlides, carsData, infoBg } }: IIndexData) => {
       <FeaturesList />
       <CarsList id="offer" carsData={carsData} />
       <AdditionalServices id="services" />
-      <InfoSection imgBgSrc={infoBg} />
+      <InfoSection srcBg={infoSectionBg.publicURL} />
       <Footer id="contact" />
     </IndexTemplate>
   );
@@ -58,15 +60,8 @@ export const query = graphql`
         }
       }
     }
-    infoBg: file(relativePath: { eq: "infoBg.jpg" }) {
-      img: childImageSharp {
-        gatsbyImageData(
-          quality: 100
-          width: 1920
-          placeholder: BLURRED
-          formats: [AUTO, WEBP, AVIF]
-        )
-      }
+    infoSectionBg: file(relativePath: { regex: "/infoBg.jpg/" }) {
+      publicURL
     }
   }
 `;

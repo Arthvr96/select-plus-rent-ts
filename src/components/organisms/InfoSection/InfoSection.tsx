@@ -1,14 +1,8 @@
 import React from 'react';
-import { InfoBg } from 'globalTypes';
 import { Title } from 'components/atoms/Title/Title';
 import { Subtitle } from 'components/atoms/Subtitle/Subtitle';
 import PerksList from 'components/molecules/PerksList/PerksList';
-import {
-  Wrapper,
-  DisclaimersWrapper,
-  StyledSectionTemplate,
-  BackgroundImage,
-} from './InfoSection.style';
+import { Wrapper, DisclaimersWrapper, StyledSectionTemplate } from './InfoSection.style';
 
 const title = 'Najlepsza oferta w trojmiescie!';
 const subtitle = 'Nie czekaj i zadzwon, lub zarezerwuj online swoje wymarzone auto jeszcze dzis !';
@@ -17,13 +11,12 @@ const disclaimer1 = '*1 - na terenie Gdańska';
 const disclaimer2 = '*2 - max do 24h przed rezerwacja. Później opłata 200zł';
 
 interface IInfoSection {
-  imgBgSrc: InfoBg;
+  srcBg: string;
 }
 
-const InfoSection = ({ imgBgSrc: { img } }: IInfoSection) => {
+const InfoSection = ({ srcBg }: IInfoSection) => {
   return (
-    <StyledSectionTemplate>
-      <BackgroundImage image={img.gatsbyImageData} alt="Samochod w garazu" />
+    <StyledSectionTemplate srcBg={srcBg}>
       <Wrapper>
         <Title as="h2" size="title4" color="white">
           {title}
