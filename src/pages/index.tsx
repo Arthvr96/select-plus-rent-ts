@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
-import { HeroSlides } from 'globalTypes';
+import { CarsData, HeroSlides } from 'globalTypes';
 import IndexTemplate from 'components/templates/IndexTemplate/IndexTemplate';
 import NavBar from 'components/organisms/NavBar/NavBar';
 import Hero from 'components/organisms/Hero/Hero';
 import FeaturesList from 'components/organisms/FeaturesList/FeaturesList';
+import CarsList from 'components/organisms/CarsList/CarsList';
 
 interface IIndexData {
   data: {
     heroSlides: HeroSlides;
+    carsData: CarsData;
   };
 }
 
@@ -19,13 +21,14 @@ const El = styled.div`
   background-color: ${({ bg }: { bg: string }) => bg};
 `;
 
-const Index = ({ data: { heroSlides } }: IIndexData) => {
+const Index = ({ data: { heroSlides, carsData } }: IIndexData) => {
+  console.log(carsData.cars[0]);
   return (
     <IndexTemplate>
       <NavBar />
       <Hero id="home" slidersData={heroSlides} />
       <FeaturesList />
-      <El id="offer" bg={'red'} />
+      <CarsList id="offer" carsData={carsData} />
       <El id="services" bg={'green'} />
       <El id="contact" bg={'purple'} />
     </IndexTemplate>
@@ -45,14 +48,15 @@ export const query = graphql`
         }
       }
     }
-    cars: allContentfulCars {
-      nodes {
+    carsData: allContentfulCars {
+      cars: nodes {
         id
         carName
         shortDescription
         info
         prices
         gallery {
+          alt: description
           gatsbyImageData(width: 1920, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
         }
       }
