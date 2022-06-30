@@ -3,6 +3,14 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 
 export const Slide = styled.div`
   position: relative;
+
+  h2 {
+    width: 80%;
+  }
+
+  h3 {
+    width: 85%;
+  }
 `;
 
 export const StyledImg = styled(GatsbyImage)`

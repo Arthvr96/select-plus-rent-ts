@@ -14,5 +14,5 @@ export const Subtitle = styled.h3<ISubtitle>`
   margin: ${({ margin = '0' }) => margin};
   padding: ${({ padding = '0' }) => padding};
   text-align: ${({ textAlign = 'center' }) => textAlign};
-  width: 85%;
+  width: 100%;
 `;

@@ -14,5 +14,5 @@ export const Title = styled.h2<ITitle>`
   margin: ${({ margin = '0' }) => margin};
   padding: ${({ padding = '0' }) => padding};
   text-align: ${({ textAlign = 'center' }) => textAlign};
-  width: 80%;
+  width: 100%;
 `;
