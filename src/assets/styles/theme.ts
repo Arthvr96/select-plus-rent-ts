@@ -5,7 +5,7 @@ export const defaultTheme: DefaultTheme = {
     bg: {
       white: '#ffffff',
       black: '#000000',
-      blue: '#008BFE',
+      blue: '#0177d8',
       darkBlue: '#0F2934',
       blackBlue: '#0C212A',
       darkGrey: '#545454',
@@ -13,7 +13,7 @@ export const defaultTheme: DefaultTheme = {
     decors: {
       white: '#ffffff',
       black: '#000000',
-      blue: '#008BFE',
+      blue: '#0177d8',
       darkBlue: '#0F2934',
       lightGrey: '#DADADA',
       darkGrey: '#545454',

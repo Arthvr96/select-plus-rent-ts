@@ -60,7 +60,7 @@ export const query = graphql`
         }
       }
     }
-    infoSectionBg: file(relativePath: { regex: "/infoBg.jpg/" }) {
+    infoSectionBg: file(relativePath: { regex: "/infoBg.webp/" }) {
       publicURL
     }
   }
