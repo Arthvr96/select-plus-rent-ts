@@ -32,9 +32,19 @@ export const BackgroundImage = styled(GatsbyImage)`
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
-    background: ${({ theme }) => theme.colors.bg.blackBlue};
-    opacity: 0.9;
+    height: 50vh;
+    background: linear-gradient(0deg, rgba(12, 33, 42, 0.3) 0%, rgba(12, 33, 42, 1) 80%);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 70;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 50vh;
+    background: linear-gradient(180deg, rgba(12, 33, 42, 0.3) 0%, rgba(12, 33, 42, 1) 80%);
   }
 `;
 

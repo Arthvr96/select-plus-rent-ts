@@ -5,12 +5,20 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 5rem;
+  margin: ${({ margin }: { margin?: string }) => margin};
 
   a {
+    position: relative;
+    display: block;
     cursor: pointer;
     padding: 1rem 2rem;
     text-indent: -999rem;
+  }
+
+  a svg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   a:first-child {

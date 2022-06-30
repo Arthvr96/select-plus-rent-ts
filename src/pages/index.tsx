@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import { CarsData, HeroSlides, InfoBg } from 'globalTypes';
 import IndexTemplate from 'components/templates/IndexTemplate/IndexTemplate';
@@ -9,6 +8,7 @@ import FeaturesList from 'components/organisms/FeaturesList/FeaturesList';
 import CarsList from 'components/organisms/CarsList/CarsList';
 import AdditionalServices from 'components/organisms/AdditionalServices/AdditionalServices';
 import InfoSection from 'components/organisms/InfoSection/InfoSection';
+import Footer from 'components/organisms/Footer/Footer';
 
 interface IIndexData {
   data: {
@@ -17,12 +17,6 @@ interface IIndexData {
     infoBg: InfoBg;
   };
 }
-
-const El = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: ${({ bg }: { bg: string }) => bg};
-`;
 
 const Index = ({ data: { heroSlides, carsData, infoBg } }: IIndexData) => {
   return (
@@ -33,7 +27,7 @@ const Index = ({ data: { heroSlides, carsData, infoBg } }: IIndexData) => {
       <CarsList id="offer" carsData={carsData} />
       <AdditionalServices id="services" />
       <InfoSection imgBgSrc={infoBg} />
-      <El id="contact" bg={'purple'} />
+      <Footer id="contact" />
     </IndexTemplate>
   );
 };
