@@ -3,12 +3,12 @@ import arrow from 'assets/svg/slider/arrow_slider.svg';
 
 export const CarouselWrapper = styled.div`
   position: relative;
-  width: 100vw;
-  height: 60vh;
-  box-shadow: 0 3px 6px 2px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
 `;
 
 export const Slider = styled.div`
+  position: relative;
   display: flex;
   width: fit-content;
   height: 100%;
@@ -20,8 +20,8 @@ type ButtonSliderDirection = { direction: 'left' | 'right' };
 
 export const ButtonSlider = styled.button<ButtonSliderDirection>`
   position: absolute;
+  z-index: 1;
   top: 50%;
-  z-index: 1000;
   left: ${({ direction }) => (direction === 'left' ? '0px' : 'unset')};
   right: ${({ direction }) => (direction === 'right' ? '0px' : 'unset')};
   transform: translateY(-50%) rotate(${({ direction }) => (direction === 'right' ? '180deg' : 0)});

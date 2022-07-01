@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigation, NavLink } from './NavigationList.style';
+import { useIndexContext } from 'providers/IndexContextProvider';
 
 const routes = [
   ['strona główna', '#home'],
@@ -8,16 +9,19 @@ const routes = [
   ['kontakt', '#contact'],
 ];
 
-interface INavigationList {
-  closeHamburger: () => void;
-}
+const NavigationList = () => {
+  const { handleToggleHamburger, handleHideNav } = useIndexContext();
 
-const NavigationList = ({ closeHamburger }: INavigationList) => {
+  const onclick = () => {
+    handleToggleHamburger();
+    handleHideNav();
+  };
+
   return (
     <Navigation>
       {routes.map((link) => (
         <li key={link[0]}>
-          <NavLink onClick={closeHamburger} href={link[1]}>
+          <NavLink onClick={onclick} href={link[1]}>
             {link[0]}
           </NavLink>
         </li>

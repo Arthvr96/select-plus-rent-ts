@@ -1,11 +1,10 @@
 import React from 'react';
-import { SectionTemplate } from 'components/templates/SectionTemplate/SectionTemplate';
 import { featuresData } from './FeaturesListMockedData';
-import { List, ListItem } from './FeaturesList.style';
+import { List, ListItem, StyledSectionTemplate } from './FeaturesList.style';
 
 const FeaturesList = () => {
   return (
-    <SectionTemplate>
+    <StyledSectionTemplate>
       <List>
         {featuresData.map(({ id, title, icon: Icon }) => (
           <ListItem key={id}>
@@ -14,7 +13,7 @@ const FeaturesList = () => {
           </ListItem>
         ))}
       </List>
-    </SectionTemplate>
+    </StyledSectionTemplate>
   );
 };
 

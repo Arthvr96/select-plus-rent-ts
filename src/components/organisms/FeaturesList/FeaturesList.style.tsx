@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { SectionTemplate } from 'components/templates/SectionTemplate/SectionTemplate';
+
+export const StyledSectionTemplate = styled(SectionTemplate)`
+  box-shadow: 0px -15px 20px -6px rgba(0, 0, 0, 0.3);
+`;
 
 export const List = styled.ul`
   display: grid;
@@ -6,6 +11,7 @@ export const List = styled.ul`
   grid-template-rows: repeat(6, 1fr);
   grid-row-gap: 1rem;
   width: 100%;
+  //padding: 2.5rem 1.5rem;
 `;
 
 export const ListItem = styled.li`

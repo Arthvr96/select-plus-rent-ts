@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { SectionTemplate } from 'components/templates/SectionTemplate/SectionTemplate';
+import { IWindowsSize } from 'globalTypes';
 
 export const StyledSectionTemplate = styled(SectionTemplate)`
+  position: relative;
+  z-index: ${({ theme }) => theme.zIndex.fixedInfoSection};
   padding: 0 1.5rem;
   background: url(${({ srcBg }: { srcBg: string }) => srcBg}) center center;
   background-size: cover;
@@ -9,7 +12,7 @@ export const StyledSectionTemplate = styled(SectionTemplate)`
   &:before {
     content: '';
     position: absolute;
-    z-index: 70;
+    z-index: -1;
     top: 0;
     left: 0;
     width: 100vw;
@@ -20,7 +23,7 @@ export const StyledSectionTemplate = styled(SectionTemplate)`
   &:after {
     content: '';
     position: absolute;
-    z-index: 70;
+    z-index: -1;
     bottom: 0;
     left: 0;
     width: 100vw;
@@ -29,19 +32,17 @@ export const StyledSectionTemplate = styled(SectionTemplate)`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<IWindowsSize>`
   position: relative;
-  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  padding-top: 5rem;
+  height: ${({ height }) => height}px;
+  padding-top: 5.5rem;
 `;
 
 export const DisclaimersWrapper = styled.div`
   position: absolute;
-  z-index: 105;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, -100%);

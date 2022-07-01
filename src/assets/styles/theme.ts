@@ -63,4 +63,13 @@ export const defaultTheme: DefaultTheme = {
     bigDesktop: '@media (min-width: 1280px)',
     huge: '@media(min-width: 1440px)',
   },
+  zIndex: {
+    parallaxPlaceholder: -1000,
+    fixedHero: 0,
+    fixedInfoSection: 0,
+    fixedFooterSection: 0,
+    navBar: 5000,
+    hamburgerMenuContent: 4001,
+    hamburgerMenu: 4000,
+  },
 };

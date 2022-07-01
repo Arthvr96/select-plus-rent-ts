@@ -9,7 +9,7 @@ export const NavBarWrapper = styled.nav<INavBarWrapperTypes>`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5000;
+  z-index: ${({ theme }) => theme.zIndex.navBar};
   display: flex;
   align-items: center;
   justify-content: space-between;
