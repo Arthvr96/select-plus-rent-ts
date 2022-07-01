@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const List = styled.ul`
   position: absolute;
-  z-index: 105;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

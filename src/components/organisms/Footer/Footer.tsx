@@ -3,15 +3,14 @@ import AboutUs from 'components/molecules/AboutUs/AboutUs';
 import Contact from 'components/molecules/Contact/Contact';
 import Copyright from 'components/molecules/Copyright/Copyright';
 import { StyledSectionTemplate, Wrapper, SectionWrapper } from './Footer.style';
+import { useWindowSize } from 'hooks/useWindowSize';
 
-interface IFooter {
-  id: string;
-}
+const Footer = () => {
+  const { height } = useWindowSize();
 
-const Footer = ({ id }: IFooter) => {
   return (
-    <StyledSectionTemplate id={id}>
-      <Wrapper>
+    <StyledSectionTemplate>
+      <Wrapper height={height}>
         <SectionWrapper>
           <AboutUs />
         </SectionWrapper>

@@ -7,7 +7,7 @@ export const Wrapper = styled.div<IContactBox>`
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 5000;
+  z-index: ${({ theme }) => theme.zIndex.hamburgerMenuContent};
   bottom: 0;
   left: 0;
   width: 100vw;

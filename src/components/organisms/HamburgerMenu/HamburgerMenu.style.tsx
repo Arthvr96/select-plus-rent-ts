@@ -1,19 +1,20 @@
 import styled from 'styled-components';
+import { IWindowsSize } from 'globalTypes';
 
-type Wrapper = {
+interface IWrapper extends IWindowsSize {
   isVisible: boolean;
-};
+}
 
-export const Wrapper = styled.nav<Wrapper>`
+export const Wrapper = styled.nav<IWrapper>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 4000;
+  z-index: ${({ theme }) => theme.zIndex.hamburgerMenu};
   width: 100vw;
-  height: 100vh;
+  height: ${({ height }) => height}px;
   padding-top: 5.5rem;
   background-color: ${({ theme }) => theme.colors.bg.darkBlue};
   transform: translateX(${({ isVisible }) => (isVisible ? '0' : '100%')});

@@ -49,3 +49,8 @@ interface IHeaders {
   margin?: string;
   padding?: string;
 }
+
+interface IWindowsSize {
+  height?: number;
+  width?: number;
+}

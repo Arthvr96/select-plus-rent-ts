@@ -14,7 +14,7 @@ const NavBar = () => {
         <Logo type="withLinkPrimary" />
         <HamburgerButton isOpen={isHamburgerOpen} toggleHamburger={handleToggleHamburger} />
       </NavBarWrapper>
-      <HamburgerMenu isVisible={isHamburgerOpen} closeHamburger={handleToggleHamburger} />
+      <HamburgerMenu isVisible={isHamburgerOpen} />
     </>
   );
 };

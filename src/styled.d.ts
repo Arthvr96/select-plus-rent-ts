@@ -64,5 +64,14 @@ declare module 'styled-components' {
       bigDesktop: string;
       huge: string;
     };
+    zIndex: {
+      navBar: number;
+      hamburgerMenu: number;
+      hamburgerMenuContent: number;
+      fixedHero: number;
+      fixedInfoSection: number;
+      fixedFooterSection: number;
+      parallaxPlaceholder: number;
+    };
   }
 }

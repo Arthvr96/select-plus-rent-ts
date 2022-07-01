@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import { SectionTemplate } from 'components/templates/SectionTemplate/SectionTemplate';
+import { IWindowsSize } from 'globalTypes';
 
 export const StyledSectionTemplate = styled(SectionTemplate)`
   padding: 0;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<IWindowsSize>`
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
-  height: 100vh;
+  height: ${({ height }) => height}px;
   padding: 2.5rem 1.5rem 8.5rem 1.5rem;
   background-color: ${({ theme }) => theme.colors.bg.blackBlue};
 `;

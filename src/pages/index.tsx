@@ -7,8 +7,7 @@ import Hero from 'components/organisms/Hero/Hero';
 import FeaturesList from 'components/organisms/FeaturesList/FeaturesList';
 import CarsList from 'components/organisms/CarsList/CarsList';
 import AdditionalServices from 'components/organisms/AdditionalServices/AdditionalServices';
-import InfoSection from 'components/organisms/InfoSection/InfoSection';
-import Footer from 'components/organisms/Footer/Footer';
+import FixedFooterSections from 'components/templates/FixedFooterSections/FixedFooterSections';
 
 interface IIndexData {
   data: {
@@ -28,8 +27,7 @@ const Index = ({ data: { heroSlides, carsData, infoSectionBg } }: IIndexData) =>
       <FeaturesList />
       <CarsList id="offer" carsData={carsData} />
       <AdditionalServices id="services" />
-      <InfoSection srcBg={infoSectionBg.publicURL} />
-      <Footer id="contact" />
+      <FixedFooterSections id="contact" infoSectionBg={infoSectionBg} />
     </IndexTemplate>
   );
 };

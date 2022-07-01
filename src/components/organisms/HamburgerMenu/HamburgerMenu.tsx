@@ -3,16 +3,18 @@ import NavigationList from 'components/molecules/NavigationList/NavigationList';
 import Socials from 'components/molecules/Socials/Socials';
 import ContactBox from 'components/molecules/ContactBox/ContactBox';
 import { Wrapper } from './HamburgerMenu.style';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 interface IHamburgerMenu {
   isVisible: boolean;
-  closeHamburger: () => void;
 }
 
-const HamburgerMenu = ({ isVisible, closeHamburger }: IHamburgerMenu) => {
+const HamburgerMenu = ({ isVisible }: IHamburgerMenu) => {
+  const { height } = useWindowSize();
+
   return (
-    <Wrapper isVisible={isVisible}>
-      <NavigationList closeHamburger={closeHamburger} />
+    <Wrapper isVisible={isVisible} height={height}>
+      <NavigationList />
       <Socials />
       <ContactBox isVisible={isVisible} />
     </Wrapper>
