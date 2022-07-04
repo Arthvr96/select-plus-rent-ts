@@ -5,5 +5,4 @@ export const FixedSection = styled.div`
   top: 0;
   left: 0;
   z-index: -1;
-  transform: translateY(${({ isFixed }: { isFixed: boolean }) => (!isFixed ? '100px' : 0)});
 `;

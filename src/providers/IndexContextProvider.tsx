@@ -68,7 +68,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
       const viewportHeight = window.innerHeight;
       const bodyHeight = -1 * (body.getBoundingClientRect().height - viewportHeight);
 
-      if (currPos <= bodyHeight + viewportHeight - 100) {
+      if (currPos <= bodyHeight + viewportHeight) {
         setFixed(false);
       } else {
         setFixed(true);
