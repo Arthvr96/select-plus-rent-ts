@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 interface IIndexContextProvider {
@@ -10,7 +10,6 @@ interface IUseIndexContext {
   isNavHidden: boolean;
   isHideHero: boolean;
   isFixed: boolean;
-  heroMoveBy: boolean;
   handleToggleHamburger: () => void;
 }
 
@@ -26,37 +25,39 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   const [isHideHero, setIsHideHero] = useState(false);
   const [isFixed, setFixed] = useState(true);
   const [scrollY, setScrollY] = useState(0);
-  const [heroMoveBy, setHeroMoveBy] = useState(0);
 
-  useScrollPosition(
-    ({ prevPos, currPos }) => {
-      const isHide = currPos.y < prevPos.y && currPos.y < -100 && !isHamburgerOpen;
+  const handleToggleHamburger = () => {
+    setHamburger(!isHamburgerOpen);
+  };
+
+  const handleHideNav = useCallback(
+    (currPos: number, prevPos: number) => {
+      const isHide = currPos < prevPos && currPos < -100 && !isHamburgerOpen;
       if (isHide !== isNavHidden) setNav(isHide);
     },
     [isNavHidden, isHamburgerOpen]
   );
 
-  useScrollPosition(
-    ({ currPos }) => {
-      if (currPos.y >= -window.innerHeight) {
+  const handleHideHero = useCallback(
+    (currPos: number) => {
+      if (currPos >= -window.innerHeight) {
         if (isHideHero) {
           setIsHideHero(false);
         }
-        setHeroMoveBy(Math.round(currPos.y * 0.5));
-      } else if (currPos.y < -window.innerHeight && !isHideHero) {
+      } else if (currPos < -window.innerHeight && !isHideHero) {
         setIsHideHero(true);
       }
     },
     [isHideHero]
   );
 
-  useScrollPosition(({ currPos }) => {
+  const handleChangeFooterPosition = useCallback((currPos: number) => {
     const body = document.querySelector('body');
     if (body) {
       const viewportHeight = window.innerHeight;
       const bodyHeight = -1 * (body.getBoundingClientRect().height - viewportHeight);
 
-      if (currPos.y <= bodyHeight + viewportHeight) {
+      if (currPos <= bodyHeight + viewportHeight) {
         setFixed(false);
       } else {
         setFixed(true);
@@ -64,9 +65,14 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     }
   }, []);
 
-  const handleToggleHamburger = () => {
-    setHamburger(!isHamburgerOpen);
-  };
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      handleHideNav(currPos.y, prevPos.y);
+      handleHideHero(currPos.y);
+      handleChangeFooterPosition(currPos.y);
+    },
+    [handleHideNav, handleHideHero, handleChangeFooterPosition]
+  );
 
   useEffect(() => {
     // back to scroll pos before hamburger menu was opened.
@@ -86,7 +92,6 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     isNavHidden,
     isHideHero,
     isFixed,
-    heroMoveBy,
     handleToggleHamburger,
   };
 

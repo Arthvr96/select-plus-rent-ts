@@ -12,13 +12,23 @@ interface IHeroType {
 
 const Hero = ({ slidersData, id }: IHeroType) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { heroMoveBy, isHideHero } = useIndexContext();
+  const { isHideHero } = useIndexContext();
 
   useEffect(() => {
-    if (wrapperRef.current) {
-      wrapperRef.current.style.transform = `translateY(${heroMoveBy}px`;
-    }
-  }, [heroMoveBy]);
+    const handleScroll = () => {
+      if (wrapperRef.current) {
+        if (scrollY < window.innerHeight) {
+          wrapperRef.current.style.transform = `translateY(${-window.scrollY / 3}px`;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <>
