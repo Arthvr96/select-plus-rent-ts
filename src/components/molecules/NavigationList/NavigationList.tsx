@@ -10,11 +10,10 @@ const routes = [
 ];
 
 const NavigationList = () => {
-  const { handleToggleHamburger, handleHideNav } = useIndexContext();
+  const { handleToggleHamburger } = useIndexContext();
 
   const onclick = () => {
     handleToggleHamburger();
-    handleHideNav();
   };
 
   return (

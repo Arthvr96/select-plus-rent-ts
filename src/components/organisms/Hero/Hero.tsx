@@ -4,6 +4,7 @@ import Carousel from 'components/organisms/Carousel/Carousel';
 import { Wrapper } from './Hero.style';
 import { useIndexContext } from 'providers/IndexContextProvider';
 import { ParallaxPlaceholder } from 'components/atoms/ParallaxPlaceholder/ParallaxPlaceholder';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 interface IHeroType {
   slidersData: HeroSlides;
@@ -11,24 +12,15 @@ interface IHeroType {
 }
 
 const Hero = ({ slidersData, id }: IHeroType) => {
+  const { height } = useWindowSize();
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { isHideHero } = useIndexContext();
+  const { isHideHero, moveBy } = useIndexContext();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (wrapperRef.current) {
-        if (scrollY < window.innerHeight) {
-          wrapperRef.current.style.transform = `translateY(${-window.scrollY / 3}px`;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    if (wrapperRef.current) {
+      wrapperRef.current.style.transform = `translateY(${moveBy}px`;
+    }
+  }, [moveBy]);
 
   return (
     <>
@@ -45,7 +37,7 @@ const Hero = ({ slidersData, id }: IHeroType) => {
           />
         </Wrapper>
       ) : null}
-      <ParallaxPlaceholder height="70vh" />
+      <ParallaxPlaceholder height={height ? height * 0.7 : 0} />
     </>
   );
 };

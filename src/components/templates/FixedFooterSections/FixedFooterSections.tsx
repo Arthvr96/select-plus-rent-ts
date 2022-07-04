@@ -4,6 +4,7 @@ import Footer from 'components/organisms/Footer/Footer';
 import { useIndexContext } from 'providers/IndexContextProvider';
 import { FixedSection } from './FixedFooterSections.style';
 import { ParallaxPlaceholder } from 'components/atoms/ParallaxPlaceholder/ParallaxPlaceholder';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 interface IFixedFooterSections {
   id: string;
@@ -13,15 +14,20 @@ interface IFixedFooterSections {
 }
 
 const FixedFooterSections = ({ infoSectionBg, id }: IFixedFooterSections) => {
-  const { isFixed } = useIndexContext();
+  const { height } = useWindowSize();
+  const { isFixed, isHideHero } = useIndexContext();
 
   return (
     <>
-      {isFixed ? <ParallaxPlaceholder height="200vh" /> : null}
-      <FixedSection isFixed={isFixed}>
-        <InfoSection srcBg={infoSectionBg.publicURL} />
-        <Footer />
-      </FixedSection>
+      {isFixed ? <ParallaxPlaceholder height={height ? height * 2 : 0} /> : null}
+      {isHideHero ? (
+        <>
+          <FixedSection isFixed={isFixed}>
+            <InfoSection srcBg={infoSectionBg.publicURL} />
+            <Footer />
+          </FixedSection>
+        </>
+      ) : null}
       <div id={id} />
     </>
   );
