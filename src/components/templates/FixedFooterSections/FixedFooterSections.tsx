@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import InfoSection from 'components/organisms/InfoSection/InfoSection';
 import Footer from 'components/organisms/Footer/Footer';
 import { useIndexContext } from 'providers/IndexContextProvider';
@@ -13,19 +13,12 @@ interface IFixedFooterSections {
 }
 
 const FixedFooterSections = ({ infoSectionBg, id }: IFixedFooterSections) => {
-  const fixedSectionRef = useRef<HTMLDivElement>(null);
-  const { footerMoveBy } = useIndexContext();
-
-  useEffect(() => {
-    if (fixedSectionRef.current) {
-      fixedSectionRef.current.style.transform = `translateY(${Math.round(footerMoveBy)}px)`;
-    }
-  }, [footerMoveBy]);
+  const { isFixed } = useIndexContext();
 
   return (
     <>
-      <ParallaxPlaceholder height="200vh" />
-      <FixedSection ref={fixedSectionRef}>
+      {isFixed ? <ParallaxPlaceholder height="200vh" /> : null}
+      <FixedSection isFixed={isFixed}>
         <InfoSection srcBg={infoSectionBg.publicURL} />
         <Footer />
       </FixedSection>

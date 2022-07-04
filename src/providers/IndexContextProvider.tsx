@@ -8,11 +8,10 @@ interface IIndexContextProvider {
 interface IUseIndexContext {
   isHamburgerOpen: boolean;
   isNavHidden: boolean;
-  handleToggleHamburger: () => void;
-  handleHideNav: () => void;
-  heroMoveBy: number;
-  footerMoveBy: number;
   isHideHero: boolean;
+  isFixed: boolean;
+  heroMoveBy: boolean;
+  handleToggleHamburger: () => void;
 }
 
 const IndexContext = React.createContext({});
@@ -22,29 +21,12 @@ export const useIndexContext = (): IUseIndexContext => {
 };
 
 const IndexContextProvider = ({ children }: IIndexContextProvider) => {
-  const [hideOnEndScroll, setHideOnEndScroll] = useState(false);
   const [isHamburgerOpen, setHamburger] = useState(false);
   const [isNavHidden, setNav] = useState(false);
+  const [isHideHero, setIsHideHero] = useState(false);
+  const [isFixed, setFixed] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [heroMoveBy, setHeroMoveBy] = useState(0);
-  const [footerMoveBy, setFooterMoveBy] = useState(0);
-  const [isHideHero, setIsHideHero] = useState(false);
-  let intervalId: number;
-
-  useScrollPosition(
-    ({ currPos }) => {
-      if (hideOnEndScroll) {
-        window.clearTimeout(intervalId);
-        intervalId = window.setTimeout(() => {
-          if (currPos.y < -50) {
-            setNav(true);
-          }
-          setHideOnEndScroll(false);
-        }, 50);
-      }
-    },
-    [hideOnEndScroll]
-  );
 
   useScrollPosition(
     ({ prevPos, currPos }) => {
@@ -55,7 +37,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   );
 
   useScrollPosition(
-    ({ prevPos, currPos }) => {
+    ({ currPos }) => {
       if (currPos.y >= -window.innerHeight) {
         if (isHideHero) {
           setIsHideHero(false);
@@ -64,39 +46,26 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
       } else if (currPos.y < -window.innerHeight && !isHideHero) {
         setIsHideHero(true);
       }
-
-      const bodyRef = document.querySelector('body');
-
-      if (bodyRef) {
-        const siteHeight = bodyRef.getBoundingClientRect().height;
-        const scrollCalc2 = -siteHeight + window.innerHeight * 2;
-        if (currPos.y <= scrollCalc2) {
-          if (prevPos.y - currPos.y > 0) {
-            if (currPos.y + siteHeight - window.innerHeight < 20) {
-              setFooterMoveBy(-window.innerHeight);
-            } else {
-              setFooterMoveBy(currPos.y + siteHeight - window.innerHeight * 2);
-            }
-          }
-          if (prevPos.y - currPos.y < 0) {
-            if (currPos.y + siteHeight - window.innerHeight > window.innerHeight - 20) {
-              setFooterMoveBy(0);
-            } else {
-              setFooterMoveBy(currPos.y + siteHeight - window.innerHeight * 2);
-            }
-          }
-        }
-      }
     },
     [isHideHero]
   );
 
+  useScrollPosition(({ currPos }) => {
+    const body = document.querySelector('body');
+    if (body) {
+      const viewportHeight = window.innerHeight;
+      const bodyHeight = -1 * (body.getBoundingClientRect().height - viewportHeight);
+
+      if (currPos.y <= bodyHeight + viewportHeight) {
+        setFixed(false);
+      } else {
+        setFixed(true);
+      }
+    }
+  }, []);
+
   const handleToggleHamburger = () => {
     setHamburger(!isHamburgerOpen);
-  };
-
-  const handleHideNav = () => {
-    setHideOnEndScroll(true);
   };
 
   useEffect(() => {
@@ -114,12 +83,11 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
 
   const values = {
     isHamburgerOpen,
-    handleToggleHamburger,
-    handleHideNav,
     isNavHidden,
-    heroMoveBy,
     isHideHero,
-    footerMoveBy,
+    isFixed,
+    heroMoveBy,
+    handleToggleHamburger,
   };
 
   return <IndexContext.Provider value={values}>{children}</IndexContext.Provider>;
