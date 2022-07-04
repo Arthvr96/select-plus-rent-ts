@@ -1,5 +1,6 @@
 import React, { ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 interface IIndexContextProvider {
   children: ReactNode;
@@ -9,8 +10,8 @@ interface IUseIndexContext {
   isHamburgerOpen: boolean;
   isNavHidden: boolean;
   isHideHero: boolean;
-  isFixed: boolean;
   moveBy: number;
+  footerMoveBy: number;
   handleToggleHamburger: () => void;
 }
 
@@ -21,12 +22,14 @@ export const useIndexContext = (): IUseIndexContext => {
 };
 
 const IndexContextProvider = ({ children }: IIndexContextProvider) => {
+  const { height: viewportHeight } = useWindowSize();
   const [isHamburgerOpen, setHamburger] = useState(false);
   const [isNavHidden, setNav] = useState(false);
   const [isHideHero, setIsHideHero] = useState(false);
-  const [isFixed, setFixed] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [moveBy, setMoveBy] = useState(0);
+  const [footerMoveBy, setFooterMoveBy] = useState(0);
+  let bodyRef: HTMLBodyElement | null = null;
 
   const handleToggleHamburger = () => {
     setHamburger(!isHamburgerOpen);
@@ -62,28 +65,39 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     [isHideHero]
   );
 
-  const changeFooterPosOnScroll = useCallback((currPos: number) => {
-    const body = document.querySelector('body');
-    if (body) {
-      const viewportHeight = window.innerHeight;
-      const bodyHeight = -1 * (body.getBoundingClientRect().height - viewportHeight);
-
-      if (currPos <= bodyHeight + viewportHeight) {
-        setFixed(false);
-      } else {
-        setFixed(true);
+  const changeFooterMoveByOnScroll = useCallback(
+    (currPos: number) => {
+      if (!bodyRef) {
+        bodyRef = document.querySelector('body');
       }
-    }
-  }, []);
+      if (bodyRef && viewportHeight) {
+        const bodyHeight = -1 * (bodyRef.getBoundingClientRect().height - viewportHeight);
+        const parallaxScrollPos = Math.round(bodyHeight - currPos + viewportHeight) * -1;
+
+        if (currPos <= bodyHeight + viewportHeight) {
+          if (currPos <= bodyHeight + 5) {
+            setFooterMoveBy(-viewportHeight);
+          } else {
+            setFooterMoveBy(parallaxScrollPos);
+          }
+        } else {
+          if (footerMoveBy === 0) {
+            setFooterMoveBy(0);
+          }
+        }
+      }
+    },
+    [viewportHeight, bodyRef]
+  );
 
   useScrollPosition(
     ({ prevPos, currPos }) => {
       hideNavOnScroll(currPos.y, prevPos.y);
       hideHeroOnScroll(currPos.y);
       changeMoveByOnScroll(currPos.y);
-      changeFooterPosOnScroll(currPos.y);
+      changeFooterMoveByOnScroll(currPos.y);
     },
-    [hideNavOnScroll, hideHeroOnScroll, changeMoveByOnScroll, changeFooterPosOnScroll]
+    [hideNavOnScroll, hideHeroOnScroll, changeMoveByOnScroll, changeFooterMoveByOnScroll]
   );
 
   useEffect(() => {
@@ -103,8 +117,8 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     isHamburgerOpen,
     isNavHidden,
     isHideHero,
-    isFixed,
     moveBy,
+    footerMoveBy,
     handleToggleHamburger,
   };
 
