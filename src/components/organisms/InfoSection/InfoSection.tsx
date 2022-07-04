@@ -4,6 +4,7 @@ import { Subtitle } from 'components/atoms/Subtitle/Subtitle';
 import PerksList from 'components/molecules/PerksList/PerksList';
 import { Wrapper, DisclaimersWrapper, StyledSectionTemplate } from './InfoSection.style';
 import { useWindowSize } from 'hooks/useWindowSize';
+import { useIndexContext } from 'providers/IndexContextProvider';
 
 const title = 'Najlepsza oferta w trojmiescie!';
 const subtitle = 'Nie czekaj i zadzwon, lub zarezerwuj online swoje wymarzone auto jeszcze dzis !';
@@ -16,11 +17,12 @@ interface IInfoSection {
 }
 
 const InfoSection = ({ srcBg }: IInfoSection) => {
+  const { isNavHidden } = useIndexContext();
   const { height } = useWindowSize();
 
   return (
     <StyledSectionTemplate srcBg={srcBg}>
-      <Wrapper height={height}>
+      <Wrapper isNavHidden={isNavHidden} height={height}>
         <Title as="h2" size="title4" color="white">
           {title}
         </Title>

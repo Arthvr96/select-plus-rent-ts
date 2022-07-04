@@ -4,13 +4,15 @@ import Contact from 'components/molecules/Contact/Contact';
 import Copyright from 'components/molecules/Copyright/Copyright';
 import { StyledSectionTemplate, Wrapper, SectionWrapper } from './Footer.style';
 import { useWindowSize } from 'hooks/useWindowSize';
+import { useIndexContext } from 'providers/IndexContextProvider';
 
 const Footer = () => {
+  const { isNavHidden } = useIndexContext();
   const { height } = useWindowSize();
 
   return (
     <StyledSectionTemplate>
-      <Wrapper height={height}>
+      <Wrapper isNavHidden={isNavHidden} height={height}>
         <SectionWrapper>
           <AboutUs />
         </SectionWrapper>

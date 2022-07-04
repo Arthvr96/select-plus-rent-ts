@@ -32,20 +32,25 @@ export const StyledSectionTemplate = styled(SectionTemplate)`
   }
 `;
 
-export const Wrapper = styled.div<IWindowsSize>`
+interface IWrapper extends IWindowsSize {
+  isNavHidden: boolean;
+}
+
+export const Wrapper = styled.div<IWrapper>`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: ${({ height }) => height}px;
-  padding-top: 5.5rem;
+  padding-top: ${({ isNavHidden }) => (isNavHidden ? '3.5rem' : '6.5rem')};
+  transition: padding 0.25s ease-in;
 `;
 
 export const DisclaimersWrapper = styled.div`
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   width: 100%;

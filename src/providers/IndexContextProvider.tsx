@@ -11,7 +11,7 @@ interface IUseIndexContext {
   isNavHidden: boolean;
   isHideHero: boolean;
   moveBy: number;
-  footerMoveBy: number;
+  footerPage: number;
   handleToggleHamburger: () => void;
 }
 
@@ -28,7 +28,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   const [isHideHero, setIsHideHero] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [moveBy, setMoveBy] = useState(0);
-  const [footerMoveBy, setFooterMoveBy] = useState(0);
+  const [footerPage, setFooterPage] = useState(0);
   let bodyRef: HTMLBodyElement | null = null;
 
   const handleToggleHamburger = () => {
@@ -66,28 +66,29 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   );
 
   const changeFooterMoveByOnScroll = useCallback(
-    (currPos: number) => {
+    (currPos: number, prevPos: number) => {
       if (!bodyRef) {
         bodyRef = document.querySelector('body');
       }
       if (bodyRef && viewportHeight) {
         const bodyHeight = -1 * (bodyRef.getBoundingClientRect().height - viewportHeight);
-        const parallaxScrollPos = Math.round(bodyHeight - currPos + viewportHeight) * -1;
 
-        if (currPos <= bodyHeight + viewportHeight) {
-          if (currPos <= bodyHeight + 5) {
-            setFooterMoveBy(-viewportHeight);
-          } else {
-            setFooterMoveBy(parallaxScrollPos);
+        if (currPos - prevPos > 0) {
+          if (currPos > bodyHeight + viewportHeight / 3) {
+            if (footerPage === 1) {
+              setFooterPage(0);
+            }
           }
-        } else {
-          if (footerMoveBy === 0) {
-            setFooterMoveBy(0);
+        } else if (currPos - prevPos < 0) {
+          if (currPos <= bodyHeight + viewportHeight - viewportHeight / 3) {
+            if (footerPage === 0) {
+              setFooterPage(1);
+            }
           }
         }
       }
     },
-    [viewportHeight, bodyRef]
+    [viewportHeight, bodyRef, footerPage]
   );
 
   useScrollPosition(
@@ -95,7 +96,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
       hideNavOnScroll(currPos.y, prevPos.y);
       hideHeroOnScroll(currPos.y);
       changeMoveByOnScroll(currPos.y);
-      changeFooterMoveByOnScroll(currPos.y);
+      changeFooterMoveByOnScroll(currPos.y, prevPos.y);
     },
     [hideNavOnScroll, hideHeroOnScroll, changeMoveByOnScroll, changeFooterMoveByOnScroll]
   );
@@ -118,7 +119,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     isNavHidden,
     isHideHero,
     moveBy,
-    footerMoveBy,
+    footerPage,
     handleToggleHamburger,
   };
 

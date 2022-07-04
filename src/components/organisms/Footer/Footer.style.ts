@@ -6,15 +6,21 @@ export const StyledSectionTemplate = styled(SectionTemplate)`
   padding: 0;
 `;
 
-export const Wrapper = styled.div<IWindowsSize>`
+interface IWrapper extends IWindowsSize {
+  isNavHidden: boolean;
+}
+
+export const Wrapper = styled.div<IWrapper>`
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
   height: ${({ height }) => height}px;
-  padding: 2.5rem 1.5rem 8.5rem 1.5rem;
   background-color: ${({ theme }) => theme.colors.bg.blackBlue};
+  padding: ${({ isNavHidden }) =>
+    isNavHidden ? '1rem 1.5rem 8.5rem 1.5rem' : '4.5rem 1.5rem 8.5rem 1.5rem'};
+  transition: padding 0.25s ease-in;
 `;
 
 export const SectionWrapper = styled.div`

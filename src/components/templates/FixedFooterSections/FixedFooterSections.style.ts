@@ -5,5 +5,5 @@ export const FixedSection = styled.div`
   top: 0;
   left: 0;
   z-index: -1;
-  transition: transform 0s linear;
+  transition: transform 0.3s ease-in-out;
 `;

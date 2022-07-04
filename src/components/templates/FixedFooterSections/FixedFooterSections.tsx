@@ -15,14 +15,18 @@ interface IFixedFooterSections {
 
 const FixedFooterSections = ({ infoSectionBg, id }: IFixedFooterSections) => {
   const { height } = useWindowSize();
-  const { isHideHero, footerMoveBy } = useIndexContext();
+  const { isHideHero, footerPage } = useIndexContext();
   const fixedSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (fixedSectionRef.current) {
-      fixedSectionRef.current.style.transform = `translateY(${footerMoveBy}px)`;
+    if (fixedSectionRef.current && height) {
+      if (footerPage === 0) {
+        fixedSectionRef.current.style.transform = `translateY(0px)`;
+      } else if (footerPage === 1) {
+        fixedSectionRef.current.style.transform = `translateY(${-height}px)`;
+      }
     }
-  }, [footerMoveBy]);
+  }, [footerPage, height]);
 
   return (
     <>
