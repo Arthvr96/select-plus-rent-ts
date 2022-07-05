@@ -22,6 +22,11 @@ const heroHeader = css`
 const sectionTitle = css`
   font-size: ${({ theme }) => theme.fontSize.title4};
   font-weight: ${({ theme }) => theme.fontWeight.bold};
+
+  ${({ theme }) => theme.mq.laptop} {
+    font-size: ${({ theme }) => theme.fontSize.title1};
+    font-weight: ${({ theme }) => theme.fontWeight.bold};
+  }
 `;
 
 const sectionTitleWhite = css`

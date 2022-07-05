@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 1.6rem;
     overflow-x: hidden;
+    background-color: #0C212A;
   }
 
   h1, h2, h3, h4, h5, h6 {

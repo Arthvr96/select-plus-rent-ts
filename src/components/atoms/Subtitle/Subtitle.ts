@@ -21,6 +21,11 @@ const heroSubtitle = css`
 const sectionSubtitle = css`
   font-size: ${({ theme }) => theme.fontSize.subtitle4};
   font-weight: ${({ theme }) => theme.fontWeight.light};
+
+  ${({ theme }) => theme.mq.laptop} {
+    font-size: ${({ theme }) => theme.fontSize.subtitle2};
+    font-weight: ${({ theme }) => theme.fontWeight.regular};
+  }
 `;
 
 const sectionSubtitleWhite = css`
