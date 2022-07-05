@@ -7,13 +7,13 @@ import { ParallaxPlaceholder } from 'components/atoms/ParallaxPlaceholder/Parall
 import { useWindowSize } from 'hooks/useWindowSize';
 
 interface IFixedFooterSections {
-  id: string;
+  ids: string[];
   infoSectionBg: {
     publicURL: string;
   };
 }
 
-const FixedFooterSections = ({ infoSectionBg, id }: IFixedFooterSections) => {
+const FixedFooterSections = ({ infoSectionBg, ids }: IFixedFooterSections) => {
   const { height } = useWindowSize();
   const { isHideHero, footerPage } = useIndexContext();
   const fixedSectionRef = useRef<HTMLDivElement>(null);
@@ -30,6 +30,7 @@ const FixedFooterSections = ({ infoSectionBg, id }: IFixedFooterSections) => {
 
   return (
     <>
+      <div id={ids[0]} />
       <ParallaxPlaceholder height={height ? height * 2 : 0} />
       {isHideHero ? (
         <>
@@ -39,7 +40,7 @@ const FixedFooterSections = ({ infoSectionBg, id }: IFixedFooterSections) => {
           </FixedSection>
         </>
       ) : null}
-      <div id={id} />
+      <div id={ids[1]} />
     </>
   );
 };

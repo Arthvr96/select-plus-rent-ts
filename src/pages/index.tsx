@@ -26,8 +26,8 @@ const Index = ({ data: { heroSlides, carsData, infoSectionBg } }: IIndexData) =>
       <Hero id="home" slidersData={heroSlides} />
       <FeaturesList />
       <CarsList id="offer" carsData={carsData} />
-      <AdditionalServices id="services" />
-      <FixedFooterSections id="contact" infoSectionBg={infoSectionBg} />
+      <AdditionalServices />
+      <FixedFooterSections ids={['whyus', 'contact']} infoSectionBg={infoSectionBg} />
     </IndexTemplate>
   );
 };
