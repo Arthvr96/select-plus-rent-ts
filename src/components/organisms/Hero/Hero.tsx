@@ -12,7 +12,7 @@ interface IHeroType {
 }
 
 const Hero = ({ slidersData, id }: IHeroType) => {
-  const { height } = useWindowSize();
+  const { width, height } = useWindowSize();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { isHideHero, moveBy } = useIndexContext();
 
@@ -25,19 +25,21 @@ const Hero = ({ slidersData, id }: IHeroType) => {
   return (
     <>
       <div id={id} />
-      {!isHideHero ? (
+      {!isHideHero && width ? (
         <Wrapper ref={wrapperRef}>
           <Carousel
             slidersData={slidersData}
             settings={{
-              animationDuration: 400,
+              animationDuration: width > 1279 ? 700 : 400,
               animationDelay: 3500,
               easingAnimation: 'ease-in-out',
             }}
           />
         </Wrapper>
       ) : null}
-      <ParallaxPlaceholder height={height ? height * 0.7 : 0} />
+      {height && width ? (
+        <ParallaxPlaceholder height={width > 1279 ? height : height * 0.7} />
+      ) : null}
     </>
   );
 };

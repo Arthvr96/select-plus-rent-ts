@@ -1,6 +1,7 @@
 import React, { ReactNode, useCallback, useContext, useEffect, useState } from 'react';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { useWindowSize } from 'hooks/useWindowSize';
+import { desktopNavVariantType } from 'globalTypes';
 
 interface IIndexContextProvider {
   children: ReactNode;
@@ -12,6 +13,7 @@ interface IUseIndexContext {
   isHideHero: boolean;
   moveBy: number;
   footerPage: number;
+  desktopNavVariant: desktopNavVariantType;
   handleToggleHamburger: () => void;
 }
 
@@ -22,9 +24,10 @@ export const useIndexContext = (): IUseIndexContext => {
 };
 
 const IndexContextProvider = ({ children }: IIndexContextProvider) => {
-  const { height: viewportHeight } = useWindowSize();
+  const { width: viewportWidth, height: viewportHeight } = useWindowSize();
   const [isHamburgerOpen, setHamburger] = useState(false);
   const [isNavHidden, setNav] = useState(false);
+  const [desktopNavVariant, setDesktopNavVariant] = useState<desktopNavVariantType>('big');
   const [isHideHero, setIsHideHero] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [moveBy, setMoveBy] = useState(0);
@@ -32,7 +35,9 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   let bodyRef: HTMLBodyElement | null = null;
 
   const handleToggleHamburger = () => {
-    setHamburger(!isHamburgerOpen);
+    if (viewportWidth && viewportWidth < 1280) {
+      setHamburger(!isHamburgerOpen);
+    }
   };
 
   const hideNavOnScroll = useCallback(
@@ -41,6 +46,29 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
       if (isHide !== isNavHidden) setNav(isHide);
     },
     [isNavHidden, isHamburgerOpen]
+  );
+
+  const handleSetDesktopNavVariant = useCallback(
+    (currPos: number, prevPos: number) => {
+      if (viewportWidth && viewportHeight && viewportWidth > 1279) {
+        if (currPos - prevPos > 0) {
+          if (currPos + viewportHeight * 0.5 > 0) {
+            if (desktopNavVariant === 'small') {
+              setDesktopNavVariant('big');
+            }
+          }
+        } else if (currPos - prevPos < 0) {
+          if (currPos + viewportHeight * 0.8 < 0) {
+            if (desktopNavVariant === 'big') {
+              setDesktopNavVariant('small');
+            }
+          }
+        }
+      } else {
+        setDesktopNavVariant('big');
+      }
+    },
+    [viewportWidth, viewportHeight, desktopNavVariant]
   );
 
   const hideHeroOnScroll = useCallback(
@@ -95,6 +123,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     ({ prevPos, currPos }) => {
       hideNavOnScroll(currPos.y, prevPos.y);
       hideHeroOnScroll(currPos.y);
+      handleSetDesktopNavVariant(currPos.y, prevPos.y);
       changeMoveByOnScroll(currPos.y);
       changeFooterMoveByOnScroll(currPos.y, prevPos.y);
     },
@@ -103,21 +132,25 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
 
   useEffect(() => {
     // back to scroll pos before hamburger menu was opened.
-    const html = document.querySelector('html');
-    if (isHamburgerOpen && html) {
-      setLastScrollY(window.scrollY);
-      html.style.scrollBehavior = 'auto';
+    if (viewportWidth && viewportWidth < 1280) {
+      const html = document.querySelector('html');
+      if (isHamburgerOpen && html) {
+        setLastScrollY(window.scrollY);
+        html.style.scrollBehavior = 'auto';
+      }
+      if (!isHamburgerOpen && html) {
+        window.scrollTo(0, lastScrollY);
+        html.style.scrollBehavior = 'smooth';
+        console.log('test');
+      }
     }
-    if (!isHamburgerOpen && html) {
-      window.scrollTo(0, lastScrollY);
-      html.style.scrollBehavior = 'smooth';
-    }
-  }, [isHamburgerOpen]);
+  }, [isHamburgerOpen, viewportWidth]);
 
   const values = {
     isHamburgerOpen,
     isNavHidden,
     isHideHero,
+    desktopNavVariant,
     moveBy,
     footerPage,
     handleToggleHamburger,

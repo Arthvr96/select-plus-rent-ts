@@ -2,6 +2,7 @@ import React from 'react';
 import LogoSvg from 'assets/svg/logo.react.svg';
 import { LogoWrapper } from './Logo.style';
 import { useIndexContext } from 'providers/IndexContextProvider';
+import { desktopNavVariantType } from 'globalTypes';
 
 const Types = {
   withLinkPrimary: 'withLinkPrimary',
@@ -11,9 +12,10 @@ const Types = {
 
 interface ILogo {
   type: typeof Types[keyof typeof Types];
+  desktopNavVariant?: desktopNavVariantType;
 }
 
-const Logo = ({ type }: ILogo) => {
+const Logo = ({ type, desktopNavVariant }: ILogo) => {
   const { isHamburgerOpen, handleToggleHamburger } = useIndexContext();
 
   const handleClick = () => {
@@ -24,7 +26,12 @@ const Logo = ({ type }: ILogo) => {
 
   if (type === Types.withLinkPrimary || type === Types.withLinkSecondary)
     return (
-      <LogoWrapper onClick={handleClick} to="/">
+      <LogoWrapper
+        onClick={handleClick}
+        to="/"
+        $isPrimary={type === Types.withLinkPrimary}
+        $desktopNavVariant={desktopNavVariant}
+      >
         {type === Types.withLinkPrimary ? <h1>Select Plus Rent</h1> : <h3>Select Plus Rent</h3>}
         <LogoSvg />
       </LogoWrapper>

@@ -23,10 +23,8 @@ const InfoSection = ({ srcBg }: IInfoSection) => {
   return (
     <StyledSectionTemplate srcBg={srcBg}>
       <Wrapper isNavHidden={isNavHidden} height={height}>
-        <Title as="h2" size="title4" color="white">
-          {title}
-        </Title>
-        <Subtitle as="h3" size="subtitle4" color="white" margin="1.5rem 0 0 0">
+        <Title variant="sectionTitleWhite">{title}</Title>
+        <Subtitle variant="sectionSubtitleWhite" margin="1.5rem 0 0 0">
           {subtitle}
         </Subtitle>
         <PerksList />

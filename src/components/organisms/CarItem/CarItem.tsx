@@ -15,10 +15,10 @@ const CarItem = ({ carData: { carName, info, prices, shortDescription, gallery }
     <Wrapper>
       <StyledImg image={gallery[0].gatsbyImageData} alt={gallery[0].alt} />
       <Content>
-        <Title as="h3" size="title6" weight="regular" textAlign="left" margin="0 0 0.9rem">
+        <Title variant="carItemHeader" as="h4" margin="0 0 0.9rem">
           {carName}
         </Title>
-        <Subtitle as="p" size="subtitle5" textAlign="left">
+        <Subtitle variant="carItemSubtitle" as="p">
           {shortDescription}
         </Subtitle>
         <InfoList info={info} />

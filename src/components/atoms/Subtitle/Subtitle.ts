@@ -1,18 +1,58 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { IHeaders } from 'globalTypes';
 
 interface ISubtitle extends IHeaders {
-  size: 'subtitle1' | 'subtitle2' | 'subtitle3' | 'subtitle4' | 'subtitle5';
-  as: 'h3' | 'h4' | 'p';
-  weight?: 'bold' | 'regular' | 'light';
+  as?: 'h4' | 'p';
+  variant: 'heroSubtitle' | 'sectionSubtitleBlack' | 'sectionSubtitleWhite' | 'carItemSubtitle';
 }
 
-export const Subtitle = styled.h3<ISubtitle>`
-  font-size: ${({ theme, size }) => theme.fontSize[size]};
-  font-weight: ${({ theme, weight = 'light' }) => theme.fontWeight[weight]};
-  color: ${({ theme, color = 'black' }) => theme.colors.text[color]};
+const heroSubtitle = css`
+  width: 85%;
+  font-size: ${({ theme }) => theme.fontSize.subtitle4};
+  font-weight: ${({ theme }) => theme.fontWeight.light};
+  color: ${({ theme }) => theme.colors.text.white};
+
+  ${({ theme }) => theme.mq.laptop} {
+    width: 92%;
+    font-size: ${({ theme }) => theme.fontSize.subtitle1};
+  } ;
+`;
+
+const sectionSubtitle = css`
+  font-size: ${({ theme }) => theme.fontSize.subtitle4};
+  font-weight: ${({ theme }) => theme.fontWeight.light};
+`;
+
+const sectionSubtitleWhite = css`
+  ${sectionSubtitle};
+  color: ${({ theme }) => theme.colors.text.white};
+`;
+
+const carItemSubtitle = css`
+  font-size: ${({ theme }) => theme.fontSize.subtitle4};
+  font-weight: ${({ theme }) => theme.fontWeight.light};
+  text-align: left;
+`;
+
+export const Subtitle = styled.h4<ISubtitle>`
+  width: 100%;
   margin: ${({ margin = '0' }) => margin};
   padding: ${({ padding = '0' }) => padding};
+  color: ${({ theme }) => theme.colors.text.black};
   text-align: ${({ textAlign = 'center' }) => textAlign};
-  width: 100%;
+
+  ${({ variant }) => {
+    switch (variant) {
+      case 'heroSubtitle':
+        return heroSubtitle;
+      case 'sectionSubtitleBlack':
+        return sectionSubtitle;
+      case 'sectionSubtitleWhite':
+        return sectionSubtitleWhite;
+      case 'carItemSubtitle':
+        return carItemSubtitle;
+      default:
+        return null;
+    }
+  }}
 `;

@@ -58,10 +58,10 @@ export const defaultTheme: DefaultTheme = {
     heavy: 900,
   },
   mq: {
-    tablet: '@media (min-width: 768px)',
-    desktop: '@media (min-width: 1024px)',
-    bigDesktop: '@media (min-width: 1280px)',
-    huge: '@media(min-width: 1440px)',
+    tablet: '@media (min-width: 481px) and (max-width: 768px)',
+    bigTablet: '@media (min-width: 769px) and (max-width: 1279px)',
+    laptop: '@media (min-width: 1280px)',
+    desktop: '@media(min-width: 1920px)',
   },
   zIndex: {
     parallaxPlaceholder: -1000,

@@ -5,4 +5,8 @@ export const Wrapper = styled.div`
   z-index: ${({ theme }) => theme.zIndex.fixedHero};
   width: 100vw;
   height: 70vh;
+
+  ${({ theme }) => theme.mq.laptop} {
+    height: 100vh;
+  }
 `;

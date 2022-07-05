@@ -29,10 +29,8 @@ const AdditionalServices = ({ id }: IAdditionalServices) => {
   return (
     <SectionTemplate id={id}>
       <Wrapper>
-        <Title as="h2" size="title4">
-          {title}
-        </Title>
-        <Subtitle as="h3" size="subtitle4" margin="1.5rem 0 3.5rem">
+        <Title variant="sectionTitleBlack">{title}</Title>
+        <Subtitle variant="sectionSubtitleBlack" margin="1.5rem 0 3.5rem">
           {subtitle}
         </Subtitle>
         <Services>

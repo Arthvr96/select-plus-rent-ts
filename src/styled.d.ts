@@ -60,9 +60,9 @@ declare module 'styled-components' {
     };
     mq: {
       tablet: string;
+      bigTablet: string;
+      laptop: string;
       desktop: string;
-      bigDesktop: string;
-      huge: string;
     };
     zIndex: {
       navBar: number;
