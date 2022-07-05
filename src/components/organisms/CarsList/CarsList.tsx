@@ -15,10 +15,8 @@ const CarsList = ({ id, carsData }: ICarList) => {
   return (
     <SectionTemplate id={id}>
       <Wrapper>
-        <Title as="h2" size="title4">
-          Flota pojazdów Select + Rent
-        </Title>
-        <Subtitle as="h3" size="subtitle4" margin="1rem 0 3rem">
+        <Title variant="sectionTitleBlack">Flota pojazdów Select + Rent</Title>
+        <Subtitle variant="sectionSubtitleBlack" margin="1rem 0 3rem">
           Zrealizuj swoje marzenia z naszą pomocą
         </Subtitle>
         {carsData.cars.map((car) => (

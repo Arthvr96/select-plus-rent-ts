@@ -36,7 +36,7 @@ const contactInfo: contactInfo = [
 const Contact = () => {
   return (
     <>
-      <Title as="h3" size="title3" color="white" margin="0">
+      <Title variant="sectionTitleWhite" margin="0">
         Kontakt
       </Title>
       <ContactList>

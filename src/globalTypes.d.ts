@@ -44,7 +44,6 @@ interface ICarouselProps {
 }
 
 interface IHeaders {
-  color?: 'white' | 'black';
   textAlign?: 'center' | 'left' | 'right';
   margin?: string;
   padding?: string;
