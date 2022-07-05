@@ -19,4 +19,8 @@ export const Wrapper = styled.nav<IWrapper>`
   background-color: ${({ theme }) => theme.colors.bg.darkBlue};
   transform: translateX(${({ isVisible }) => (isVisible ? '0' : '100%')});
   transition: transform 0.3s ease-in;
+
+  ${({ theme }) => theme.mq.laptop} {
+    display: none;
+  }
 `;

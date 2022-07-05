@@ -1,15 +1,20 @@
 import React from 'react';
 import { Navigation, NavLink } from './NavigationList.style';
 import { useIndexContext } from 'providers/IndexContextProvider';
+import { desktopNavVariantType } from 'globalTypes';
 
 const routes = [
-  ['strona główna', '#home'],
-  ['oferta', '#offer'],
-  ['usługi', '#services'],
-  ['kontakt', '#contact'],
+  ['Strona główna', '#home'],
+  ['Oferta', '#offer'],
+  ['Usługi', '#services'],
+  ['Kontakt', '#contact'],
 ];
 
-const NavigationList = () => {
+interface INavigationList {
+  desktopNavVariant: desktopNavVariantType;
+}
+
+const NavigationList = ({ desktopNavVariant }: INavigationList) => {
   const { handleToggleHamburger } = useIndexContext();
 
   const onclick = () => {
@@ -20,7 +25,7 @@ const NavigationList = () => {
     <Navigation>
       {routes.map((link) => (
         <li key={link[0]}>
-          <NavLink onClick={onclick} href={link[1]}>
+          <NavLink desktopNavVariant={desktopNavVariant} onClick={onclick} href={link[1]}>
             {link[0]}
           </NavLink>
         </li>
