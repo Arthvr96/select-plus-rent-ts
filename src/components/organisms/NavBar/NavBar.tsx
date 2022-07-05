@@ -5,12 +5,10 @@ import HamburgerButton from 'components/molecules/HamburgerButton/HamburgerButto
 import HamburgerMenu from 'components/organisms/HamburgerMenu/HamburgerMenu';
 import { NavBarWrapper } from './NavBar.style';
 import NavigationList from 'components/molecules/NavigationList/NavigationList';
-import { useWindowSize } from 'hooks/useWindowSize';
 import Socials from 'components/molecules/Socials/Socials';
 
 const NavBar = () => {
-  const { width } = useWindowSize();
-  const { isHamburgerOpen, handleToggleHamburger, isNavHidden, desktopNavVariant } =
+  const { isHamburgerOpen, handleToggleHamburger, isNavHidden, desktopNavVariant, isDesktop } =
     useIndexContext();
 
   return (
@@ -21,7 +19,7 @@ const NavBar = () => {
         desktopNavVariant={desktopNavVariant}
       >
         <Logo type="withLinkPrimary" desktopNavVariant={desktopNavVariant} />
-        {width && width > 1279 ? (
+        {isDesktop ? (
           <>
             <NavigationList desktopNavVariant={desktopNavVariant} />
             <Socials margin="0" />

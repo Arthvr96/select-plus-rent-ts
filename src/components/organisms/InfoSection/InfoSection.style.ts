@@ -32,18 +32,13 @@ export const StyledSectionTemplate = styled(SectionTemplate)`
   }
 `;
 
-interface IWrapper extends IWindowsSize {
-  isNavHidden: boolean;
-}
-
-export const Wrapper = styled.div<IWrapper>`
+export const Wrapper = styled.div<IWindowsSize>`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: ${({ height }) => height}px;
-  padding-top: ${({ isNavHidden }) => (isNavHidden ? '3.5rem' : '6.5rem')};
-  transition: padding 0.25s ease-in;
+  padding-top: 6.5rem;
 `;
 
 export const DisclaimersWrapper = styled.div`

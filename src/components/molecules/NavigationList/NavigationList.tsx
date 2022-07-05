@@ -6,7 +6,7 @@ import { desktopNavVariantType } from 'globalTypes';
 const routes = [
   ['Strona główna', '#home'],
   ['Oferta', '#offer'],
-  ['Usługi', '#services'],
+  ['Dlaczego my?', '#whyus'],
   ['Kontakt', '#contact'],
 ];
 

@@ -26,7 +26,7 @@ export const Navigation = styled.ul<INavigation>`
   }
 
   ${({ theme }) => theme.mq.laptop} {
-    width: 50rem;
+    width: 60rem;
     flex-direction: row;
     justify-content: space-between;
     justify-self: flex-end;

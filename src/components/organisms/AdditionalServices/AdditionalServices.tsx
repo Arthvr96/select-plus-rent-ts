@@ -21,13 +21,9 @@ const servicesData = [
   },
 ];
 
-interface IAdditionalServices {
-  id: string;
-}
-
-const AdditionalServices = ({ id }: IAdditionalServices) => {
+const AdditionalServices = () => {
   return (
-    <SectionTemplate id={id}>
+    <SectionTemplate>
       <Wrapper>
         <Title variant="sectionTitleBlack">{title}</Title>
         <Subtitle variant="sectionSubtitleBlack" margin="1.5rem 0 3.5rem">

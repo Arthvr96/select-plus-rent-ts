@@ -8,6 +8,7 @@ interface IIndexContextProvider {
 }
 
 interface IUseIndexContext {
+  isDesktop: boolean;
   isHamburgerOpen: boolean;
   isNavHidden: boolean;
   isHideHero: boolean;
@@ -25,6 +26,7 @@ export const useIndexContext = (): IUseIndexContext => {
 
 const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   const { width: viewportWidth, height: viewportHeight } = useWindowSize();
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isHamburgerOpen, setHamburger] = useState(false);
   const [isNavHidden, setNav] = useState(false);
   const [desktopNavVariant, setDesktopNavVariant] = useState<desktopNavVariantType>('big');
@@ -35,7 +37,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   let bodyRef: HTMLBodyElement | null = null;
 
   const handleToggleHamburger = () => {
-    if (viewportWidth && viewportWidth < 1280) {
+    if (!isDesktop) {
       setHamburger(!isHamburgerOpen);
     }
   };
@@ -50,7 +52,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
 
   const handleSetDesktopNavVariant = useCallback(
     (currPos: number, prevPos: number) => {
-      if (viewportWidth && viewportHeight && viewportWidth > 1279) {
+      if (viewportHeight && isDesktop) {
         if (currPos - prevPos > 0) {
           if (currPos + viewportHeight * 0.5 > 0) {
             if (desktopNavVariant === 'small') {
@@ -64,11 +66,12 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
             }
           }
         }
-      } else {
+      }
+      if (!isDesktop) {
         setDesktopNavVariant('big');
       }
     },
-    [viewportWidth, viewportHeight, desktopNavVariant]
+    [isDesktop, viewportHeight, desktopNavVariant]
   );
 
   const hideHeroOnScroll = useCallback(
@@ -102,13 +105,13 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
         const bodyHeight = -1 * (bodyRef.getBoundingClientRect().height - viewportHeight);
 
         if (currPos - prevPos > 0) {
-          if (currPos > bodyHeight + viewportHeight / 3) {
+          if (currPos > bodyHeight + viewportHeight / 2) {
             if (footerPage === 1) {
               setFooterPage(0);
             }
           }
         } else if (currPos - prevPos < 0) {
-          if (currPos <= bodyHeight + viewportHeight - viewportHeight / 3) {
+          if (currPos <= bodyHeight + viewportHeight - viewportHeight / 2) {
             if (footerPage === 0) {
               setFooterPage(1);
             }
@@ -132,7 +135,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
 
   useEffect(() => {
     // back to scroll pos before hamburger menu was opened.
-    if (viewportWidth && viewportWidth < 1280) {
+    if (!isDesktop) {
       const html = document.querySelector('html');
       if (isHamburgerOpen && html) {
         setLastScrollY(window.scrollY);
@@ -141,12 +144,21 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
       if (!isHamburgerOpen && html) {
         window.scrollTo(0, lastScrollY);
         html.style.scrollBehavior = 'smooth';
-        console.log('test');
       }
     }
-  }, [isHamburgerOpen, viewportWidth]);
+  }, [isHamburgerOpen, isDesktop]);
+
+  useEffect(() => {
+    if (viewportWidth && viewportWidth >= 1280 && !isDesktop) {
+      setIsDesktop(true);
+    }
+    if (viewportWidth && viewportWidth < 1280 && isDesktop) {
+      setIsDesktop(false);
+    }
+  }, [viewportWidth, isDesktop]);
 
   const values = {
+    isDesktop,
     isHamburgerOpen,
     isNavHidden,
     isHideHero,
