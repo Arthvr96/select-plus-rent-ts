@@ -15,6 +15,7 @@ export const Wrapper = styled.div<IWindowsSize>`
   height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.colors.bg.blackBlue};
   padding: 5.5rem 1.5rem 8.5rem 1.5rem;
+  transition: height 0.2s ease-in;
 `;
 
 export const SectionWrapper = styled.div`

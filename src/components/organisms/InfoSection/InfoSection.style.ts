@@ -39,6 +39,7 @@ export const Wrapper = styled.div<IWindowsSize>`
   align-items: center;
   height: ${({ height }) => height}px;
   padding-top: 6.5rem;
+  transition: height 0.2s ease-in;
 `;
 
 export const DisclaimersWrapper = styled.div`
