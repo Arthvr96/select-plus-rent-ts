@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
-  padding: 1rem 0;
+  height: 6rem;
   border-top: 1px solid ${({ theme }) => theme.colors.decors.white};
   background-color: ${({ theme }) => theme.colors.bg.blackBlue};
 

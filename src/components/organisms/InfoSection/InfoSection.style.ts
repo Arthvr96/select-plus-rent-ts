@@ -33,23 +33,21 @@ export const StyledSectionTemplate = styled(SectionTemplate)`
 `;
 
 export const Wrapper = styled.div<IWindowsSize>`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-row-gap: 5px;
   height: ${({ height }) => height}px;
   padding-top: 6.5rem;
   transition: height 0.2s ease-in;
 `;
 
 export const DisclaimersWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-self: flex-end;
+  padding-bottom: 1rem;
 
   p {
     font-size: ${({ theme }) => theme.fontSize.thumbnail};

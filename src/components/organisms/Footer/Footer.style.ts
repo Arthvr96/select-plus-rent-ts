@@ -7,14 +7,14 @@ export const StyledSectionTemplate = styled(SectionTemplate)`
 `;
 
 export const Wrapper = styled.div<IWindowsSize>`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: grid;
+  grid-template-rows: 1fr 1fr 60px;
+  grid-template-columns: 1fr;
+  grid-row-gap: 5px;
   width: 100%;
   height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.colors.bg.blackBlue};
-  padding: 5.5rem 1.5rem 8.5rem 1.5rem;
+  padding: 1rem 0 0 0;
   transition: height 0.2s ease-in;
 `;
 
@@ -22,5 +22,5 @@ export const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 50%;
+  padding: 0 1.5rem;
 `;
