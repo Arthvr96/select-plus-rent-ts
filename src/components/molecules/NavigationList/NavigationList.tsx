@@ -15,10 +15,11 @@ interface INavigationList {
 }
 
 const NavigationList = ({ desktopNavVariant }: INavigationList) => {
-  const { handleToggleHamburger } = useIndexContext();
+  const { handleToggleHamburger, handleSetScrolling } = useIndexContext();
 
   const onclick = () => {
     handleToggleHamburger();
+    handleSetScrolling();
   };
 
   return (

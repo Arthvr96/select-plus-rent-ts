@@ -15,6 +15,7 @@ interface IUseIndexContext {
   moveBy: number;
   footerPage: number;
   desktopNavVariant: desktopNavVariantType;
+  handleSetScrolling: () => void;
   handleToggleHamburger: () => void;
 }
 
@@ -28,13 +29,15 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   const { width: viewportWidth, height: viewportHeight } = useWindowSize();
   const [isDesktop, setIsDesktop] = useState(false);
   const [isHamburgerOpen, setHamburger] = useState(false);
-  const [isNavHidden, setNav] = useState(false);
+  const [isNavHidden, setNavHidden] = useState(false);
+  const [isScrolling, setScrolling] = useState(false);
   const [desktopNavVariant, setDesktopNavVariant] = useState<desktopNavVariantType>('big');
   const [isHideHero, setIsHideHero] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [moveBy, setMoveBy] = useState(0);
   const [footerPage, setFooterPage] = useState(0);
   let bodyRef: HTMLBodyElement | null = null;
+  let timeoutRef: number;
 
   const handleToggleHamburger = () => {
     if (!isDesktop) {
@@ -42,10 +45,31 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     }
   };
 
+  const handleSetScrolling = () => {
+    setScrolling(true);
+  };
+
+  const hideNavAfterScrollByLink = useCallback(
+    (currPos: number) => {
+      if (isScrolling) {
+        window.clearTimeout(timeoutRef);
+        timeoutRef = window.setTimeout(() => {
+          if (currPos + 50 >= 0) {
+            setNavHidden(false);
+          } else {
+            setNavHidden(true);
+          }
+          setScrolling(false);
+        }, 50);
+      }
+    },
+    [isScrolling]
+  );
+
   const hideNavOnScroll = useCallback(
     (currPos: number, prevPos: number) => {
       const isHide = currPos < prevPos && currPos < -100 && !isHamburgerOpen;
-      if (isHide !== isNavHidden) setNav(isHide);
+      if (isHide !== isNavHidden) setNavHidden(isHide);
     },
     [isNavHidden, isHamburgerOpen]
   );
@@ -125,12 +149,20 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
   useScrollPosition(
     ({ prevPos, currPos }) => {
       hideNavOnScroll(currPos.y, prevPos.y);
+      hideNavAfterScrollByLink(currPos.y);
       hideHeroOnScroll(currPos.y);
       handleSetDesktopNavVariant(currPos.y, prevPos.y);
       changeMoveByOnScroll(currPos.y);
       changeFooterMoveByOnScroll(currPos.y, prevPos.y);
     },
-    [hideNavOnScroll, hideHeroOnScroll, changeMoveByOnScroll, changeFooterMoveByOnScroll]
+    [
+      hideNavOnScroll,
+      hideNavAfterScrollByLink,
+      hideHeroOnScroll,
+      handleSetDesktopNavVariant,
+      changeMoveByOnScroll,
+      changeFooterMoveByOnScroll,
+    ]
   );
 
   useEffect(() => {
@@ -165,6 +197,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     desktopNavVariant,
     moveBy,
     footerPage,
+    handleSetScrolling,
     handleToggleHamburger,
   };
 
