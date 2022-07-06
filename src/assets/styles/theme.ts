@@ -61,7 +61,7 @@ export const defaultTheme: DefaultTheme = {
     tablet: '@media (min-width: 481px) and (max-width: 768px)',
     bigTablet: '@media (min-width: 769px) and (max-width: 1279px)',
     laptop: '@media (min-width: 1280px)',
-    desktop: '@media(min-width: 1920px)',
+    desktop: '@media(min-width: 1440px)',
   },
   zIndex: {
     parallaxPlaceholder: -1000,

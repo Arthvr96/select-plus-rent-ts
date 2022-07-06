@@ -3,7 +3,13 @@ import { IHeaders } from 'globalTypes';
 
 interface ITitle extends IHeaders {
   as?: 'h2' | 'h3' | 'h4' | 'p';
-  variant: 'heroHeader' | 'sectionTitleBlack' | 'sectionTitleWhite' | 'carItemHeader';
+  variant:
+    | 'heroHeader'
+    | 'sectionTitleBlack'
+    | 'sectionTitleWhite'
+    | 'carItemHeader'
+    | 'contactHeaderLeft'
+    | 'contactHeaderRight';
 }
 
 const heroHeader = css`
@@ -45,6 +51,18 @@ const carItemHeader = css`
   }
 `;
 
+const contactHeader = css`
+  font-size: ${({ theme }) => theme.fontSize.title3};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  color: ${({ theme }) => theme.colors.text.white};
+  text-align: left;
+`;
+
+const contactHeaderRight = css`
+  ${contactHeader};
+  text-align: right;
+`;
+
 export const Title = styled.h3<ITitle>`
   width: 100%;
   margin: ${({ margin = '0' }) => margin};
@@ -62,6 +80,10 @@ export const Title = styled.h3<ITitle>`
         return sectionTitleWhite;
       case 'carItemHeader':
         return carItemHeader;
+      case 'contactHeaderLeft':
+        return contactHeader;
+      case 'contactHeaderRight':
+        return contactHeaderRight;
       default:
         return null;
     }

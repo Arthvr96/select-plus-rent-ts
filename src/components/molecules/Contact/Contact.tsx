@@ -4,6 +4,7 @@ import PhoneIcon from 'assets/svg/footerIcons/phone.react.svg';
 import MailIcon from 'assets/svg/footerIcons/mail.react.svg';
 import PinIcon from 'assets/svg/footerIcons/pin.react.svg';
 import { ContactList } from './Contact.style';
+import { useIndexContext } from 'providers/IndexContextProvider';
 
 type contactInfo = {
   id: string;
@@ -34,9 +35,10 @@ const contactInfo: contactInfo = [
 ];
 
 const Contact = () => {
+  const { isDesktop } = useIndexContext();
   return (
-    <>
-      <Title variant="sectionTitleWhite" margin="0">
+    <div>
+      <Title variant={isDesktop ? 'contactHeaderRight' : 'sectionTitleWhite'} margin="0 0 3rem 0">
         Kontakt
       </Title>
       <ContactList>
@@ -50,7 +52,7 @@ const Contact = () => {
           </li>
         ))}
       </ContactList>
-    </>
+    </div>
   );
 };
 

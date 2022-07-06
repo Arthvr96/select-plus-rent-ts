@@ -15,23 +15,29 @@ interface IFixedFooterSections {
 
 const FixedFooterSections = ({ infoSectionBg, ids }: IFixedFooterSections) => {
   const { height } = useWindowSize();
-  const { isHideHero, footerPage } = useIndexContext();
+  const { isHideHero, footerPage, isDesktop } = useIndexContext();
   const fixedSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (fixedSectionRef.current && height) {
-      if (footerPage === 0) {
-        fixedSectionRef.current.style.transform = `translateY(0px)`;
-      } else if (footerPage === 1) {
-        fixedSectionRef.current.style.transform = `translateY(${-height}px)`;
+    if (!isDesktop) {
+      if (fixedSectionRef.current && height) {
+        if (footerPage === 0) {
+          fixedSectionRef.current.style.transform = `translateY(0px)`;
+        } else if (footerPage === 1) {
+          fixedSectionRef.current.style.transform = `translateY(${-height}px)`;
+        }
       }
     }
-  }, [footerPage, height]);
+  }, [footerPage, height, isDesktop]);
 
   return (
     <>
       <div id={ids[0]} />
-      <ParallaxPlaceholder height={height ? height * 2 : 0} />
+      {isDesktop ? (
+        <ParallaxPlaceholder height={height ? height : 0} />
+      ) : (
+        <ParallaxPlaceholder height={height ? height * 2 : 0} />
+      )}
       {isHideHero ? (
         <>
           <FixedSection ref={fixedSectionRef}>

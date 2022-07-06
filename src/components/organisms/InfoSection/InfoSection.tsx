@@ -21,12 +21,12 @@ const InfoSection = ({ srcBg }: IInfoSection) => {
   return (
     <StyledSectionTemplate srcBg={srcBg}>
       <Wrapper height={height}>
-        <div>
+        <hgroup>
           <Title variant="sectionTitleWhite">{title}</Title>
           <Subtitle variant="sectionSubtitleWhite" margin="1.5rem 0 0 0">
             {subtitle}
           </Subtitle>
-        </div>
+        </hgroup>
         <PerksList />
         <DisclaimersWrapper>
           <p>{disclaimer1}</p>

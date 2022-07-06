@@ -25,8 +25,8 @@ export const List = styled.ul`
     width: fit-content;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 7.5rem;
-    grid-row-gap: 8.5rem;
+    grid-column-gap: 4.5vw;
+    grid-row-gap: 6vh;
   }
 `;
 
