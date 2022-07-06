@@ -38,6 +38,11 @@ const carItemHeader = css`
   font-size: ${({ theme }) => theme.fontSize.title6};
   font-weight: ${({ theme }) => theme.fontWeight.regular};
   text-align: left;
+
+  ${({ theme }) => theme.mq.laptop} {
+    font-size: ${({ theme }) => theme.fontSize.title4};
+    font-weight: ${({ theme }) => theme.fontWeight.bold};
+  }
 `;
 
 export const Title = styled.h3<ITitle>`

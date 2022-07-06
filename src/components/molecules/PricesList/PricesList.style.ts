@@ -28,10 +28,18 @@ export const PriceBox = styled.button`
   p:first-child {
     font-size: ${({ theme }) => theme.fontSize.thumbnail};
     font-weight: ${({ theme }) => theme.fontWeight.regular};
+
+    ${({ theme }) => theme.mq.laptop} {
+      font-size: ${({ theme }) => theme.fontSize.paragraph};
+    }
   }
 
   p:last-child {
     font-size: ${({ theme }) => theme.fontSize.paragraph};
     font-weight: ${({ theme }) => theme.fontWeight.bold};
+
+    ${({ theme }) => theme.mq.laptop} {
+      font-size: ${({ theme }) => theme.fontSize.title4};
+    }
   }
 `;

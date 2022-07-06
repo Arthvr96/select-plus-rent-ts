@@ -15,4 +15,8 @@ export const StyledImg = styled(GatsbyImage)`
 
 export const Content = styled.div`
   padding: 1rem;
+
+  ${({ theme }) => theme.mq.laptop} {
+    padding: 3rem 2rem;
+  }
 `;

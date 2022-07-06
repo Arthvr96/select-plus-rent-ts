@@ -6,4 +6,8 @@ export const SectionTemplate = styled.section`
   height: fit-content;
   padding: 2.5rem 1.5rem;
   background: ${({ theme }) => theme.colors.bg.white};
+
+  ${({ theme }) => theme.mq.laptop} {
+    padding: 5rem 12.5rem;
+  }
 `;

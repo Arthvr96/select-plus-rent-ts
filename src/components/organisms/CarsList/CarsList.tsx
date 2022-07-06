@@ -15,10 +15,12 @@ const CarsList = ({ id, carsData }: ICarList) => {
   return (
     <SectionTemplate id={id}>
       <Wrapper>
-        <Title variant="sectionTitleBlack">Flota pojazdów Select + Rent</Title>
-        <Subtitle variant="sectionSubtitleBlack" margin="1rem 0 3rem">
-          Zrealizuj swoje marzenia z naszą pomocą
-        </Subtitle>
+        <hgroup>
+          <Title variant="sectionTitleBlack">Flota pojazdów Select + Rent</Title>
+          <Subtitle variant="sectionSubtitleBlack" margin="1rem 0 3rem">
+            Zrealizuj swoje marzenia z naszą pomocą
+          </Subtitle>
+        </hgroup>
         {carsData.cars.map((car) => (
           <CarItem key={car.id} carData={car} />
         ))}

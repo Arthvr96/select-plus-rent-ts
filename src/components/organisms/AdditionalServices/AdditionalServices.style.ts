@@ -14,6 +14,10 @@ export const Services = styled.ul`
   grid-template-rows: 1fr;
   grid-column-gap: 1rem;
 
+  ${({ theme }) => theme.mq.laptop} {
+    grid-column-gap: 8rem;
+  }
+
   li {
     display: flex;
     flex-direction: column;
