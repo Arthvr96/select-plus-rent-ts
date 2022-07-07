@@ -10,6 +10,18 @@ export const Wrapper = styled.div`
     flex-direction: column;
   }
 
+  ${({ theme }) => theme.mq.tablet} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 110px repeat(2, 1fr);
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+
+    hgroup {
+      grid-area: 1 / 1 / 2 / 3;
+    }
+  }
+
   ${({ theme }) => theme.mq.laptop} {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

@@ -11,7 +11,7 @@ const routes = [
 ];
 
 interface INavigationList {
-  desktopNavVariant: desktopNavVariantType;
+  desktopNavVariant?: desktopNavVariantType;
 }
 
 const NavigationList = ({ desktopNavVariant }: INavigationList) => {

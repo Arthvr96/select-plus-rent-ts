@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-export const ParallaxPlaceholder = styled.div`
+interface IParallaxPlaceholder {
+  height: string;
+}
+
+export const ParallaxPlaceholder = styled.div<IParallaxPlaceholder>`
   position: relative;
   z-index: ${({ theme }) => theme.zIndex.parallaxPlaceholder};
   width: 100vw;
-  height: ${({ height }: { height: number }) => height}px;
+  height: ${({ height }) => height};
 `;

@@ -25,6 +25,26 @@ export const Navigation = styled.ul<INavigation>`
     margin-bottom: 0;
   }
 
+  ${({ theme }) => theme.mq.tablet} {
+    width: 40rem;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-self: center;
+    margin: 0;
+
+    li {
+      margin: 0;
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      background-color: ${({ theme, isSelected }) =>
+        isSelected ? theme.colors.bg.blue : 'transparent'};
+    }
+
+    li:first-child {
+      display: none;
+    }
+  }
+
   ${({ theme }) => theme.mq.laptop} {
     width: 60rem;
     flex-direction: row;
@@ -52,6 +72,14 @@ export const NavLink = styled.a<INavLink>`
   letter-spacing: 1px;
   cursor: pointer;
   transition: font-size 0.2s ease-in;
+
+  ${({ theme }) => theme.mq.tablet} {
+    padding: 2rem 0.5rem;
+    font-size: ${({ theme }) => theme.fontSize.button2};
+    font-weight: ${({ theme }) => theme.fontWeight.regular};
+    text-transform: none;
+    letter-spacing: 0;
+  }
 
   ${({ theme }) => theme.mq.laptop} {
     padding: 2rem 0.5rem;

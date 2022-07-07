@@ -20,6 +20,10 @@ export const Wrapper = styled.nav<IWrapper>`
   transform: translateX(${({ isVisible }) => (isVisible ? '0' : '100%')});
   transition: transform 0.3s ease-in;
 
+  ${({ theme }) => theme.mq.tablet} {
+    display: none;
+  }
+
   ${({ theme }) => theme.mq.laptop} {
     display: none;
   }

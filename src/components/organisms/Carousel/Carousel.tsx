@@ -7,7 +7,6 @@ import { CarouselWrapper, Slider, ButtonSlider } from './Carousel.style';
 const Carousel = ({ slidersData, settings }: ICarouselProps) => {
   const { animationDuration, animationDelay, easingAnimation } = settings;
   const firstSlide = slidersData.slides[0];
-
   const [moveBy, setMoveBy] = useState(0);
   const [delayInfinityLoop, setDelayInfinityLoop] = useState(animationDelay);
 

@@ -12,9 +12,9 @@ interface IHeroType {
 }
 
 const Hero = ({ slidersData, id }: IHeroType) => {
-  const { width, height } = useWindowSize();
+  const { height } = useWindowSize();
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { isHideHero, moveBy, isDesktop } = useIndexContext();
+  const { isHideHero, moveBy, isMobile } = useIndexContext();
 
   useEffect(() => {
     if (wrapperRef.current) {
@@ -25,19 +25,19 @@ const Hero = ({ slidersData, id }: IHeroType) => {
   return (
     <>
       <div id={id} />
-      {!isHideHero && width ? (
+      {!isHideHero ? (
         <Wrapper ref={wrapperRef}>
           <Carousel
             slidersData={slidersData}
             settings={{
-              animationDuration: isDesktop ? 700 : 400,
+              animationDuration: isMobile ? 400 : 700,
               animationDelay: 3500,
               easingAnimation: 'ease-in-out',
             }}
           />
         </Wrapper>
       ) : null}
-      {height && width ? <ParallaxPlaceholder height={isDesktop ? height : height * 0.7} /> : null}
+      {height ? <ParallaxPlaceholder height={isMobile ? `${height * 0.7}px` : '100vh'} /> : null}
     </>
   );
 };

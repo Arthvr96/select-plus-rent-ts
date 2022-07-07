@@ -60,7 +60,6 @@ declare module 'styled-components' {
     };
     mq: {
       tablet: string;
-      bigTablet: string;
       laptop: string;
       desktop: string;
     };

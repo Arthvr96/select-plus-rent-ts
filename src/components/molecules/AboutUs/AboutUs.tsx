@@ -11,11 +11,11 @@ const paragraph2 =
   'Pozwól już dziś spełnić nam Twoje marzenia i wynajmij auto w Gdańsku, Gdyni lub Sopocie.';
 
 const AboutUs = () => {
-  const { isDesktop } = useIndexContext();
+  const { isMobile } = useIndexContext();
 
   return (
     <>
-      <Title variant={isDesktop ? 'contactHeaderLeft' : 'sectionTitleWhite'} margin="0 0 2rem 0">
+      <Title variant={isMobile ? 'sectionTitleWhite' : 'contactHeaderLeft'} margin="0 0 2rem 0">
         O nas
       </Title>
       <Logo type="withNoLink" />
@@ -24,7 +24,7 @@ const AboutUs = () => {
         {paragraph1_2}
       </Paragraph>
       <Paragraph>{paragraph2}</Paragraph>
-      <Socials margin="2rem 0 0 0" />
+      <Socials margin="5rem 0 0 0" />
     </>
   );
 };

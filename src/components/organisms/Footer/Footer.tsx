@@ -11,10 +11,10 @@ const Footer = () => {
   return (
     <StyledSectionTemplate>
       <Wrapper height={height}>
-        <SectionWrapper alignItems="flex-start" padding="0 0 0 13rem" gridArea="1 / 1 / 2 / 2">
+        <SectionWrapper alignItems="flex-start" isLeft>
           <AboutUs />
         </SectionWrapper>
-        <SectionWrapper alignItems="flex-end" padding="0 13rem 0 0" gridArea="1 / 2 / 2 / 3">
+        <SectionWrapper alignItems="flex-end">
           <Contact />
         </SectionWrapper>
         <Copyright />

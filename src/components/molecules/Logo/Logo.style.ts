@@ -27,6 +27,12 @@ export const LogoWrapper = styled(Link)<ILogoWrapper>`
     text-indent: -999rem;
   }
 
+  ${({ theme }) => theme.mq.tablet} {
+    svg {
+      transform: scale(1.15);
+    }
+  }
+
   ${({ theme }) => theme.mq.laptop} {
     svg {
       transform: scale(

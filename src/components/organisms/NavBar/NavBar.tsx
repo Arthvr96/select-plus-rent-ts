@@ -8,7 +8,7 @@ import NavigationList from 'components/molecules/NavigationList/NavigationList';
 import Socials from 'components/molecules/Socials/Socials';
 
 const NavBar = () => {
-  const { isHamburgerOpen, handleToggleHamburger, isNavHidden, desktopNavVariant, isDesktop } =
+  const { isHamburgerOpen, handleToggleHamburger, isNavHidden, desktopNavVariant, isMobile } =
     useIndexContext();
 
   return (
@@ -19,7 +19,7 @@ const NavBar = () => {
         desktopNavVariant={desktopNavVariant}
       >
         <Logo type="withLinkPrimary" desktopNavVariant={desktopNavVariant} />
-        {isDesktop ? (
+        {!isMobile ? (
           <>
             <NavigationList desktopNavVariant={desktopNavVariant} />
             <Socials margin="0" />

@@ -7,6 +7,11 @@ export const ContactList = styled.ul`
   justify-content: space-around;
   height: 70%;
 
+  ${({ theme }) => theme.mq.tablet} {
+    justify-content: center;
+    height: fit-content;
+  }
+
   ${({ theme }) => theme.mq.laptop} {
     justify-content: center;
     height: fit-content;
@@ -19,6 +24,11 @@ export const ContactList = styled.ul`
     grid-template-rows: 1fr;
     grid-column-gap: 1.5rem;
 
+    ${({ theme }) => theme.mq.tablet} {
+      grid-template-columns: 1fr 50px;
+      margin-bottom: 2rem;
+    }
+
     ${({ theme }) => theme.mq.laptop} {
       grid-template-columns: 1fr 50px;
       margin-bottom: 2rem;
@@ -29,6 +39,10 @@ export const ContactList = styled.ul`
     justify-self: center;
     align-self: center;
 
+    ${({ theme }) => theme.mq.tablet} {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+
     ${({ theme }) => theme.mq.laptop} {
       grid-area: 1 / 2 / 2 / 3;
     }
@@ -36,6 +50,11 @@ export const ContactList = styled.ul`
 
   li:last-child {
     margin-bottom: 0;
+
+    ${({ theme }) => theme.mq.tablet} {
+      grid-area: 1 / 1 / 2 / 2;
+      margin-bottom: 0;
+    }
 
     ${({ theme }) => theme.mq.laptop} {
       grid-area: 1 / 1 / 2 / 2;
@@ -47,6 +66,10 @@ export const ContactList = styled.ul`
     font-size: ${({ theme }) => theme.fontSize.paragraph};
     font-weight: ${({ theme }) => theme.fontWeight.regular};
     color: ${({ theme }) => theme.colors.text.white};
+
+    ${({ theme }) => theme.mq.tablet} {
+      text-align: right;
+    }
 
     ${({ theme }) => theme.mq.laptop} {
       text-align: right;

@@ -58,8 +58,7 @@ export const defaultTheme: DefaultTheme = {
     heavy: 900,
   },
   mq: {
-    tablet: '@media (min-width: 481px) and (max-width: 768px)',
-    bigTablet: '@media (min-width: 769px) and (max-width: 1279px)',
+    tablet: '@media (min-width: 768px) and (max-width: 1279px)',
     laptop: '@media (min-width: 1280px)',
     desktop: '@media(min-width: 1440px)',
   },

@@ -13,8 +13,8 @@ export const NavBarWrapper = styled.nav<INavBarWrapperTypes>`
   left: 0;
   z-index: ${({ theme }) => theme.zIndex.navBar};
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   width: 100vw;
   height: 5.5rem;
   padding: 0 2rem;
@@ -23,10 +23,22 @@ export const NavBarWrapper = styled.nav<INavBarWrapperTypes>`
   box-shadow: ${({ showShadow }) => (showShadow ? '0 4px 4px rgba(0, 0, 0, 0.25)' : 'none')};
   transition: transform 0.2s ease-in, height 0.2s ease-in, padding 0.2s ease-in;
 
+  ${({ theme }) => theme.mq.tablet} {
+    display: grid;
+    grid-template-columns: 161px 1fr 75px;
+    grid-template-rows: 1fr;
+    height: 7.5rem;
+    padding: 0 3rem;
+    background-color: ${({ theme, desktopNavVariant: variant }) =>
+      variant === 'big' ? 'transparent' : theme.colors.bg.darkBlue};
+    box-shadow: ${({ desktopNavVariant: variant, showShadow }) =>
+      variant === 'small' && showShadow ? '0 4px 4px rgba(0, 0, 0, 0.25)' : 'none'};
+  }
+
   ${({ theme }) => theme.mq.laptop} {
     display: grid;
     grid-template-columns: ${({ desktopNavVariant }) =>
-      desktopNavVariant === 'big' ? '330px 1fr 75px;' : '150px 1fr 75px;'};
+      desktopNavVariant === 'big' ? '330px 1fr 75px' : '150px 1fr 75px'};
     grid-template-rows: 1fr;
     height: ${({ desktopNavVariant }) => (desktopNavVariant === 'big' ? '17rem' : '7.5rem')};
     padding: ${({ desktopNavVariant }) => (desktopNavVariant === 'big' ? '0 10rem' : '0 5rem')};

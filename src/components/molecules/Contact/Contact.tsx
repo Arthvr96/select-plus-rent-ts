@@ -35,10 +35,10 @@ const contactInfo: contactInfo = [
 ];
 
 const Contact = () => {
-  const { isDesktop } = useIndexContext();
+  const { isMobile } = useIndexContext();
   return (
     <div>
-      <Title variant={isDesktop ? 'contactHeaderRight' : 'sectionTitleWhite'} margin="0 0 3rem 0">
+      <Title variant={isMobile ? 'sectionTitleWhite' : 'contactHeaderRight'} margin="0 0 3rem 0">
         Kontakt
       </Title>
       <ContactList>

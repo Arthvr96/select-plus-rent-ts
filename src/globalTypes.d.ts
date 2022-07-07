@@ -2,7 +2,7 @@ import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 type ContentFullImage = { alt: string; gatsbyImageData: IGatsbyImageData };
 
-type desktopNavVariantType = 'big' | 'small';
+type desktopNavVariantType = 'big' | 'small' | undefined;
 
 interface ICarouselSlide {
   id: string;

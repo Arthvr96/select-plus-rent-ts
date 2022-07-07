@@ -7,6 +7,11 @@ export const Wrapper = styled.div`
   width: 100%;
   margin: ${({ margin }: { margin?: string }) => margin};
 
+  ${({ theme }) => theme.mq.tablet} {
+    justify-content: flex-start;
+    transform: translateX(-10px);
+  }
+
   ${({ theme }) => theme.mq.laptop} {
     justify-content: flex-start;
     transform: translateX(-10px);

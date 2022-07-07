@@ -43,6 +43,9 @@ export const Button = styled.button<HamburgerButton>`
     transform: translateY(${({ isOpen }) => (isOpen ? '-9px' : '0')});
   }
 
+  ${({ theme }) => theme.mq.tablet} {
+    display: none;
+  }
   ${({ theme }) => theme.mq.laptop} {
     display: none;
   } ;

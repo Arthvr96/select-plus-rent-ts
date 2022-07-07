@@ -6,6 +6,10 @@ export const Wrapper = styled.div`
   width: 100vw;
   height: 70vh;
 
+  ${({ theme }) => theme.mq.tablet} {
+    height: 100vh;
+  }
+
   ${({ theme }) => theme.mq.laptop} {
     height: 100vh;
   }
