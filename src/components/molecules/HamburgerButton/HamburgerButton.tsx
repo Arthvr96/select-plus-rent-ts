@@ -9,7 +9,7 @@ interface IHamburgerButton {
 const HamburgerButton = ({ isOpen, toggleHamburger }: IHamburgerButton) => {
   return (
     <Button type="button" isOpen={isOpen} onClick={toggleHamburger}>
-      Hambrguer button
+      {isOpen ? 'Opened hamburger button' : 'Closed hamburger button'}
       <div />
     </Button>
   );

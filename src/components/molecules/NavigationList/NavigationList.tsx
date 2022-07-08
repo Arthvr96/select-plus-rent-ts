@@ -3,7 +3,7 @@ import { Navigation, NavLink } from './NavigationList.style';
 import { useIndexContext } from 'providers/IndexContextProvider';
 import { desktopNavVariantType } from 'globalTypes';
 
-const routes = [
+export const routes = [
   ['Strona główna', '#home'],
   ['Oferta', '#offer'],
   ['Dlaczego my?', '#whyus'],
@@ -17,7 +17,7 @@ interface INavigationList {
 const NavigationList = ({ desktopNavVariant }: INavigationList) => {
   const { handleToggleHamburger, handleSetScrolling } = useIndexContext();
 
-  const onclick = () => {
+  const handleClick = () => {
     handleToggleHamburger();
     handleSetScrolling();
   };
@@ -26,7 +26,7 @@ const NavigationList = ({ desktopNavVariant }: INavigationList) => {
     <Navigation>
       {routes.map((link) => (
         <li key={link[0]}>
-          <NavLink desktopNavVariant={desktopNavVariant} onClick={onclick} href={link[1]}>
+          <NavLink desktopNavVariant={desktopNavVariant} onClick={handleClick} href={link[1]}>
             {link[0]}
           </NavLink>
         </li>
