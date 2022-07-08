@@ -41,16 +41,16 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off', //
-      },
-    },
-    {
       files: ['./src/pages/*.tsx'],
       rules: {
         'no-unused-expressions': 'off',
         'import/no-default-export': 'off',
+      },
+    },
+    {
+      files: ['*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off', //
       },
     },
     {
