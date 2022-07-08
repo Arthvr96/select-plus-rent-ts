@@ -8,7 +8,7 @@ interface ICarouselSlide {
   id: string;
   title: string;
   subtitle: string;
-  slideImage: ContentFullImage;
+  slideImage?: ContentFullImage;
 }
 
 interface ICar {
@@ -36,13 +36,15 @@ const EaseNames = {
   Linear: 'linear',
 } as const;
 
+type settingsType = {
+  animationDuration: number;
+  animationDelay: number;
+  easingAnimation: typeof EaseNames[keyof typeof EaseNames];
+};
+
 interface ICarouselProps {
   slidersData: HeroSlides;
-  settings: {
-    animationDuration: number;
-    animationDelay: number;
-    easingAnimation: typeof EaseNames[keyof typeof EaseNames];
-  };
+  settings: settingsType;
 }
 
 interface IHeaders {

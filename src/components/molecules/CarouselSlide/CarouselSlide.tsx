@@ -4,11 +4,7 @@ import { Title } from 'components/atoms/Title/Title';
 import { Subtitle } from 'components/atoms/Subtitle/Subtitle';
 import { Slide, SlideContentWrapper, StyledImg } from './CarouselSlide.style';
 
-const CarouselSlide = ({
-  title,
-  subtitle,
-  slideImage: { alt, gatsbyImageData },
-}: ICarouselSlide) => {
+const CarouselSlide = ({ title, subtitle, slideImage }: ICarouselSlide) => {
   return (
     <Slide>
       <SlideContentWrapper>
@@ -19,7 +15,7 @@ const CarouselSlide = ({
           {subtitle}
         </Subtitle>
       </SlideContentWrapper>
-      <StyledImg alt={alt} image={gatsbyImageData} />
+      {slideImage ? <StyledImg alt={slideImage.alt} image={slideImage.gatsbyImageData} /> : null}
     </Slide>
   );
 };

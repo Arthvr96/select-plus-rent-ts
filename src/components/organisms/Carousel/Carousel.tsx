@@ -119,14 +119,14 @@ const Carousel = ({ slidersData, settings }: ICarouselProps) => {
       >
         Next slide
       </ButtonSlider>
-      <Slider ref={sliderRef}>
-        {slidersData.slides.map(({ id, title, subtitle, slideImage: { alt, gatsbyImageData } }) => (
+      <Slider data-testid="slider" ref={sliderRef}>
+        {slidersData.slides.map(({ id, title, subtitle, slideImage }) => (
           <CarouselSlide
             key={id}
             id={id}
             title={title}
             subtitle={subtitle}
-            slideImage={{ alt, gatsbyImageData }}
+            slideImage={slideImage}
           />
         ))}
         <CarouselSlide
