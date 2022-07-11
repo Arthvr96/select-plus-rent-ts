@@ -7,7 +7,7 @@ import { CarsData } from 'globalTypes';
 import { Wrapper } from './CarList.style';
 
 interface ICarList {
-  id: string;
+  id?: string;
   carsData: CarsData;
 }
 

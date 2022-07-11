@@ -17,7 +17,7 @@ interface ICar {
   shortDescription: string;
   info: string[];
   prices: string[];
-  gallery: ContentFullImage[];
+  gallery?: ContentFullImage[];
 }
 
 type HeroSlides = {

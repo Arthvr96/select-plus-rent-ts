@@ -38,6 +38,8 @@ module.exports = {
     'jest/no-identical-title': 'error',
     'jest/prefer-to-have-length': 'warn',
     'jest/valid-expect': 'error',
+    'jest/no-conditional-expect': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
   },
   overrides: [
     {

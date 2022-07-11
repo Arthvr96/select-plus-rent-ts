@@ -19,7 +19,17 @@ interface IUseIndexContext {
   handleToggleHamburger: () => void;
 }
 
-const IndexContext = React.createContext({});
+export const IndexContext = React.createContext<IUseIndexContext>({
+  isMobile: false,
+  isHamburgerOpen: false,
+  isNavHidden: false,
+  isHideHero: false,
+  moveBy: 0,
+  footerPage: 0,
+  desktopNavVariant: 'big',
+  handleSetScrolling: () => {},
+  handleToggleHamburger: () => {},
+});
 
 export const useIndexContext = (): IUseIndexContext => {
   return useContext(IndexContext) as IUseIndexContext;

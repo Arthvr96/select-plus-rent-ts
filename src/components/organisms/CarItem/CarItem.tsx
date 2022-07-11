@@ -13,7 +13,7 @@ interface ICarItem {
 const CarItem = ({ carData: { carName, info, prices, shortDescription, gallery } }: ICarItem) => {
   return (
     <Wrapper>
-      <StyledImg image={gallery[0].gatsbyImageData} alt={gallery[0].alt} />
+      {gallery ? <StyledImg image={gallery[0].gatsbyImageData} alt={gallery[0].alt} /> : null}
       <Content>
         <Title variant="carItemHeader" as="h4" margin="0 0 0.9rem">
           {carName}
