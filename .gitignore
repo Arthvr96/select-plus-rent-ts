@@ -1,6 +1,7 @@
 node_modules/
 .cache/
 public
+coverage/
 src/gatsby-types.d.ts
 .idea
 .env.development
