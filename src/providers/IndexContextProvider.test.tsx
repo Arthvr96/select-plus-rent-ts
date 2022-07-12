@@ -45,4 +45,18 @@ describe('IndexContextProvider', () => {
     state = screen.getByText('isHamburgerOpen: false');
     expect(state).toBeTruthy();
   });
+
+  it('check if setScrolling change state correctly', async () => {
+    handleRender(2);
+
+    Object.defineProperty(window, 'scrollTop', { value: 10, writable: true });
+
+    const button = screen.getByText('scrollTo');
+    let state = screen.getByText('isScrolling: false');
+    expect(state).toBeTruthy();
+
+    fireEvent.click(button);
+    state = screen.getByText('isScrolling: true');
+    expect(state).toBeTruthy();
+  });
 });

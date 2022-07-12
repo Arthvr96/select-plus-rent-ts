@@ -84,8 +84,6 @@ export const Title = styled.h3<ITitle>`
         return contactHeader;
       case 'contactHeaderRight':
         return contactHeaderRight;
-      default:
-        return null;
     }
   }}
 `;

@@ -56,8 +56,6 @@ export const Subtitle = styled.h4<ISubtitle>`
         return sectionSubtitleWhite;
       case 'carItemSubtitle':
         return carItemSubtitle;
-      default:
-        return null;
     }
   }}
 `;

@@ -15,7 +15,7 @@ const CarouselSlide = ({ title, subtitle, slideImage }: ICarouselSlide) => {
           {subtitle}
         </Subtitle>
       </SlideContentWrapper>
-      {slideImage ? <StyledImg alt={slideImage.alt} image={slideImage.gatsbyImageData} /> : null}
+      <StyledImg alt={slideImage.alt} image={slideImage.gatsbyImageData} />
     </Slide>
   );
 };

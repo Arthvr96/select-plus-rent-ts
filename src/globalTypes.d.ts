@@ -8,7 +8,7 @@ interface ICarouselSlide {
   id: string;
   title: string;
   subtitle: string;
-  slideImage?: ContentFullImage;
+  slideImage: ContentFullImage;
 }
 
 interface ICar {
@@ -17,7 +17,7 @@ interface ICar {
   shortDescription: string;
   info: string[];
   prices: string[];
-  gallery?: ContentFullImage[];
+  gallery: ContentFullImage[];
 }
 
 type HeroSlides = {

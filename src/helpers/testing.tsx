@@ -27,8 +27,8 @@ export const setWindowSize = (dimension: 'width' | 'height', value: number) => {
 };
 
 export const IndexTestingComponent = ({ testID }: { testID: number }) => {
-  const { isMobile, isHamburgerOpen, handleToggleHamburger } = useIndexContext();
-
+  const { isMobile, isHamburgerOpen, isScrolling, handleToggleHamburger, handleSetScrolling } =
+    useIndexContext();
   switch (testID) {
     case 0:
       return <p>isMobile: {isMobile.toString()}</p>;
@@ -37,6 +37,13 @@ export const IndexTestingComponent = ({ testID }: { testID: number }) => {
         <>
           <button onClick={handleToggleHamburger}>hamburger</button>
           <p>isHamburgerOpen: {isHamburgerOpen.toString()}</p>;
+        </>
+      );
+    case 2:
+      return (
+        <>
+          <button onClick={handleSetScrolling}>scrollTo</button>
+          <p>isScrolling: {isScrolling.toString()}</p>
         </>
       );
   }

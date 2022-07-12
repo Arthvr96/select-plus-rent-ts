@@ -12,6 +12,7 @@ interface IUseIndexContext {
   isHamburgerOpen: boolean;
   isNavHidden: boolean;
   isHideHero: boolean;
+  isScrolling: boolean;
   moveBy: number;
   footerPage: number;
   desktopNavVariant: desktopNavVariantType;
@@ -24,6 +25,7 @@ export const IndexContext = React.createContext<IUseIndexContext>({
   isHamburgerOpen: false,
   isNavHidden: false,
   isHideHero: false,
+  isScrolling: false,
   moveBy: 0,
   footerPage: 0,
   desktopNavVariant: 'big',
@@ -204,6 +206,7 @@ const IndexContextProvider = ({ children }: IIndexContextProvider) => {
     isHamburgerOpen,
     isNavHidden,
     isHideHero,
+    isScrolling,
     desktopNavVariant,
     moveBy,
     footerPage,
