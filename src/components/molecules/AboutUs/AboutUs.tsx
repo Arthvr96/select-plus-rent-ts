@@ -18,7 +18,7 @@ const AboutUs = () => {
       <Title variant={isMobile ? 'sectionTitleWhite' : 'contactHeaderLeft'} margin="0 0 2rem 0">
         O nas
       </Title>
-      <Logo type="withNoLink" />
+      <Logo />
       <Paragraph margin="2rem 0 2rem 0">
         {paragraph1_1}
         {paragraph1_2}

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Navigation, NavLink } from './NavigationList.style';
 import { useIndexContext } from 'providers/IndexContextProvider';
 import { desktopNavVariantType } from 'globalTypes';
+import { Navigation, NavLink } from './NavigationList.style';
 
 export const routes = [
   ['Strona główna', '#home'],

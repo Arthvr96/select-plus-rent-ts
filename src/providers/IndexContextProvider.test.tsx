@@ -2,6 +2,7 @@ import React from 'react';
 import IndexContextProvider from './IndexContextProvider';
 import { render, screen, fireEvent } from 'test-utils';
 import { IndexTestingComponent, setWindowSize } from 'helpers/testing';
+import { waitFor } from '@testing-library/react';
 
 const handleRender = (testID: number) =>
   render(
@@ -15,12 +16,11 @@ describe('IndexContextProvider', () => {
     handleRender(0);
 
     setWindowSize('width', 1440);
-    let state = screen.getByText('isMobile: false');
-    expect(state).toBeTruthy();
+    const isMobile = screen.getByTestId('isMobile');
+    expect(isMobile).toHaveTextContent('false');
 
     setWindowSize('width', 500);
-    state = screen.getByText('isMobile: true');
-    expect(state).toBeTruthy();
+    expect(isMobile).toHaveTextContent('true');
   });
 
   it('check if isHamburgerOpen change state correctly  | testID 1', () => {
@@ -29,34 +29,31 @@ describe('IndexContextProvider', () => {
     setWindowSize('width', 500);
 
     const button = screen.getByText('hamburger');
-    let state = screen.getByText('isHamburgerOpen: false');
-    expect(state).toBeTruthy();
+    const isHamburgerOpen = screen.getByTestId('isHamburgerOpen');
+    expect(isHamburgerOpen).toHaveTextContent('false');
 
     fireEvent.click(button);
-    state = screen.getByText('isHamburgerOpen: true');
-    expect(state).toBeTruthy();
+    expect(isHamburgerOpen).toHaveTextContent('true');
 
     fireEvent.click(button);
-    state = screen.getByText('isHamburgerOpen: false');
-    expect(state).toBeTruthy();
+    expect(isHamburgerOpen).toHaveTextContent('false');
 
     setWindowSize('width', 1440);
     fireEvent.click(button);
-    state = screen.getByText('isHamburgerOpen: false');
-    expect(state).toBeTruthy();
+    expect(isHamburgerOpen).toHaveTextContent('false');
   });
 
-  it('check if setScrolling change state correctly', async () => {
+  it('check if setScrolling change state correctly', () => {
     handleRender(2);
 
-    Object.defineProperty(window, 'scrollTop', { value: 10, writable: true });
-
     const button = screen.getByText('scrollTo');
-    let state = screen.getByText('isScrolling: false');
-    expect(state).toBeTruthy();
+    const isScrolling = screen.getByTestId('isScrolling');
+    const isNavHidden = screen.getByTestId('isNavHidden');
+    expect(isScrolling).toHaveTextContent('false');
+    expect(isNavHidden).toHaveTextContent('false');
 
     fireEvent.click(button);
-    state = screen.getByText('isScrolling: true');
-    expect(state).toBeTruthy();
+    expect(isScrolling).toHaveTextContent('true');
+    expect(isNavHidden).toHaveTextContent('false');
   });
 });

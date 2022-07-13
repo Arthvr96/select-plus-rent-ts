@@ -7,11 +7,10 @@ import { desktopNavVariantType } from 'globalTypes';
 const Types = {
   withLinkPrimary: 'withLinkPrimary',
   withLinkSecondary: 'withLinkSecondary',
-  withNoLink: 'withNoLink',
 } as const;
 
 interface ILogo {
-  type: typeof Types[keyof typeof Types];
+  type?: typeof Types[keyof typeof Types];
   desktopNavVariant?: desktopNavVariantType;
 }
 
@@ -36,8 +35,7 @@ const Logo = ({ type, desktopNavVariant }: ILogo) => {
         <LogoSvg />
       </LogoWrapper>
     );
-  if (type === Types.withNoLink) return <LogoSvg />;
-  return <></>;
+  return <LogoSvg />;
 };
 
 export default Logo;

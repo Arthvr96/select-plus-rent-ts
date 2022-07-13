@@ -36,8 +36,7 @@ export const Navigation = styled.ul<INavigation>`
       margin: 0;
       border-radius: 5px;
       padding: 0.5rem 1rem;
-      background-color: ${({ theme, isSelected }) =>
-        isSelected ? theme.colors.bg.blue : 'transparent'};
+      background-color: transparent;
     }
 
     li:first-child {
@@ -56,8 +55,7 @@ export const Navigation = styled.ul<INavigation>`
       margin: 0;
       border-radius: 5px;
       padding: 0.5rem 1rem;
-      background-color: ${({ theme, isSelected }) =>
-        isSelected ? theme.colors.bg.blue : 'transparent'};
+      background-color: transparent;
     }
   }
 `;
@@ -71,7 +69,11 @@ export const NavLink = styled.a<INavLink>`
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
-  transition: font-size 0.2s ease-in;
+  transition: font-size 0.2s ease-in, color 0.2s ease-in;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.bg.blue};
+  }
 
   ${({ theme }) => theme.mq.tablet} {
     padding: 2rem 0.5rem;

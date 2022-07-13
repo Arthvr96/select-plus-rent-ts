@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from 'test-utils';
 import IndexContextProvider, { useIndexContext } from 'providers/IndexContextProvider';
 import NavBar from 'components/organisms/NavBar/NavBar';
+import { NavBarWrapper } from './NavBar.style';
 import { setWindowSize } from 'helpers/testing';
 import { routes } from 'components/molecules/NavigationList/NavigationList';
 import { fireEvent } from '@testing-library/react';
@@ -89,13 +90,56 @@ describe('NavBar', () => {
       </IndexContextProvider>
     );
     const isHamburgerOpen = screen.getByTestId('isHamburgerOpen');
-    expect(isHamburgerOpen).toHaveTextContent('false');
     const button = screen.getByText('Closed hamburger button');
+    const navbar = button.parentElement;
+
+    expect(isHamburgerOpen).toHaveTextContent('false');
+    expect(navbar).toBeVisible();
+    expect(navbar).toHaveStyle({
+      'box-shadow': '0 4px 4px rgba(0,0,0,0.25)',
+    });
+
     fireEvent.click(button);
     expect(isHamburgerOpen).toHaveTextContent('true');
     expect(button).toHaveTextContent('Opened hamburger button');
+    expect(navbar).toHaveStyle({
+      'box-shadow': 'none',
+    });
+
     fireEvent.click(button);
     expect(isHamburgerOpen).toHaveTextContent('false');
     expect(button).toHaveTextContent('Closed hamburger button');
+  });
+
+  it('should NavBarWrapper be hidden', () => {
+    render(
+      <NavBarWrapper
+        data-testid="navbar"
+        isHidden={true}
+        desktopNavVariant="big"
+        showShadow={true}
+      />
+    );
+    const navbar = screen.getByTestId('navbar');
+
+    expect(navbar).toHaveStyle({
+      transform: 'translateY(-100%)',
+    });
+  });
+
+  it('should NavBarWrapper be visible', () => {
+    render(
+      <NavBarWrapper
+        data-testid="navbar"
+        isHidden={false}
+        desktopNavVariant="big"
+        showShadow={true}
+      />
+    );
+    const navbar = screen.getByTestId('navbar');
+
+    expect(navbar).toHaveStyle({
+      transform: 'translateY(0)',
+    });
   });
 });
