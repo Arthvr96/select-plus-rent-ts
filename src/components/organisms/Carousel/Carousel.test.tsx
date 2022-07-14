@@ -4,9 +4,10 @@ import { ButtonSlider } from './Carousel.style';
 import Carousel from './Carousel';
 import { heroSlidesMock } from 'mocks/graphqlMocks';
 import { waitFor } from '@testing-library/react';
+import { setWindowSize } from 'helpers/testing';
 
 describe('Carousel', () => {
-  it('should render slider button with direction right', () => {
+  it('should render ButtonSlider with direction right', () => {
     const onclick = jest.fn();
     render(
       <>
@@ -67,10 +68,29 @@ describe('Carousel', () => {
       />
     );
     const slider = screen.getByTestId('slider');
-    expect(slider.children).toHaveLength(heroSlidesMock.slides.length + 1);
+    expect(slider.children).toHaveLength(heroSlidesMock.slides.length);
   });
 
-  it('should change slide to next and after to previous', async () => {
+  it('should render correctly settings passed in props', () => {
+    render(
+      <Carousel
+        slidersData={heroSlidesMock}
+        settings={{
+          animationDuration: 700,
+          animationDelay: 3500,
+          easingAnimation: 'ease-in-out',
+        }}
+      />
+    );
+    const slider = screen.getByTestId('slider');
+
+    expect(slider).toHaveStyle({
+      'transition-duration': '700ms',
+      'transition-timing-function': 'ease-in-out',
+    });
+  });
+
+  it('should change slide to next by clicking on the arrow', async () => {
     render(
       <Carousel
         slidersData={heroSlidesMock}
@@ -83,7 +103,6 @@ describe('Carousel', () => {
     );
     const slider = screen.getByTestId('slider');
     const buttonNext = screen.getByText('Next slide');
-    const buttonPrevious = screen.getByText('Previous slide');
 
     expect(slider).toHaveStyle({
       transform: 'translateX(0vw)',
@@ -98,15 +117,61 @@ describe('Carousel', () => {
       },
       { timeout: 150 }
     );
+  });
+
+  it('should change slide to previous by clicking on the arrow', async () => {
+    render(
+      <Carousel
+        slidersData={heroSlidesMock}
+        settings={{
+          animationDuration: 100,
+          animationDelay: 3500,
+          easingAnimation: 'ease-in-out',
+        }}
+      />
+    );
+    const slider = screen.getByTestId('slider');
+    const buttonPrevious = screen.getByText('Previous slide');
+
+    expect(slider).toHaveStyle({
+      transform: 'translateX(0vw)',
+    });
 
     fireEvent.click(buttonPrevious);
     await waitFor(
       () => {
         expect(slider).toHaveStyle({
-          transform: 'translateX(0vw)',
+          transform: 'translateX(-200vw)',
         });
       },
       { timeout: 150 }
+    );
+  });
+
+  it('should change slide to next automatic after 400ms', async () => {
+    render(
+      <Carousel
+        slidersData={heroSlidesMock}
+        settings={{
+          animationDuration: 100,
+          animationDelay: 300,
+          easingAnimation: 'ease-in-out',
+        }}
+      />
+    );
+    const slider = screen.getByTestId('slider');
+
+    expect(slider).toHaveStyle({
+      transform: 'translateX(0vw)',
+    });
+
+    await waitFor(
+      () => {
+        expect(slider).toHaveStyle({
+          transform: 'translateX(-100vw)',
+        });
+      },
+      { timeout: 400 }
     );
   });
 });
