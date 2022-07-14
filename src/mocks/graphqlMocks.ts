@@ -27,6 +27,12 @@ export const heroSlidesMock: HeroSlides = {
       subtitle: 'slide2-subtitle',
       slideImage: contentFullImageMock,
     },
+    {
+      id: '2',
+      title: 'slide3-title',
+      subtitle: 'slide3-subtitle',
+      slideImage: contentFullImageMock,
+    },
   ],
 };
 

@@ -1,105 +1,60 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { debounce } from 'lodash';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ICarouselProps } from 'globalTypes';
 import CarouselSlide from 'components/molecules/CarouselSlide/CarouselSlide';
 import { CarouselWrapper, Slider, ButtonSlider } from './Carousel.style';
 
 const Carousel = ({ slidersData, settings }: ICarouselProps) => {
+  const [sliderPos, setSliderPos] = useState(0);
+  const [isWorking, setIsWorking] = useState(false);
   const { animationDuration, animationDelay, easingAnimation } = settings;
-  const firstSlide = slidersData.slides[0];
-  const [moveBy, setMoveBy] = useState(0);
-  const [delayInfinityLoop, setDelayInfinityLoop] = useState(animationDelay);
-
   const sliderRef = useRef<HTMLDivElement>(null);
-  let interval: number;
+  let infiniteLoopRef: number;
+  const maxSliderPos = (slidersData.slides.length - 1) * -100;
 
-  const changeSlide = debounce((direction: 'left' | 'right') => {
-    if (sliderRef.current) {
-      window.clearInterval(interval);
-      const sliderEl = sliderRef.current;
-      const maxMoveBy = (sliderEl.children.length - 1) * 100;
-
-      const timeOut = (value: number) => {
-        sliderEl.style.transitionDuration = `${animationDuration}ms`;
-        setMoveBy(value);
-      };
-
-      if (direction === 'left') {
-        if (moveBy !== 0) {
-          if (delayInfinityLoop === animationDuration) {
-            setDelayInfinityLoop(animationDelay);
-          }
-          if (sliderEl.style.transitionDuration === '0ms') {
-            sliderEl.style.transitionDuration = `${animationDuration}ms`;
-          }
-          setMoveBy(moveBy - 100);
-        } else {
-          sliderEl.style.transitionDuration = `0ms`;
-          setMoveBy(maxMoveBy);
-          window.setTimeout(() => timeOut(maxMoveBy - 100), 0);
+  const changeSlide = useCallback(
+    (direction: 'left' | 'right') => {
+      if (!isWorking) {
+        setIsWorking(true);
+        window.clearInterval(infiniteLoopRef);
+        window.setTimeout(() => setIsWorking(false), animationDuration);
+        if (direction === 'right') {
+          setSliderPos((prevState) => (prevState === maxSliderPos ? 0 : prevState - 100));
         }
-      } else if (direction === 'right') {
-        if (moveBy !== maxMoveBy) {
-          if (delayInfinityLoop === animationDuration) {
-            setDelayInfinityLoop(animationDelay);
-          }
-          if (sliderEl.style.transitionDuration === '0ms') {
-            sliderEl.style.transitionDuration = `${animationDuration}ms`;
-          }
-          setMoveBy(moveBy + 100);
-        } else {
-          sliderEl.style.transitionDuration = `0ms`;
-          setMoveBy(0);
-          window.setTimeout(() => timeOut(100), 0);
+        if (direction === 'left') {
+          setSliderPos((prevState) => (prevState === 0 ? maxSliderPos : prevState + 100));
         }
       }
-    }
-  }, animationDuration);
+    },
+    [isWorking, setSliderPos, animationDuration]
+  );
 
   useEffect(() => {
-    //init settings for infinite loop
+    //init
     if (sliderRef.current) {
       sliderRef.current.style.transitionDuration = `${animationDuration}ms`;
-      sliderRef.current.style.transitionTimingFunction = `${easingAnimation}`;
+      sliderRef.current.style.transitionTimingFunction = easingAnimation;
     }
-  }, []);
+  }, [animationDuration, easingAnimation]);
 
   useEffect(() => {
-    // infinite loop
-
-    if (sliderRef.current) {
-      const sliderEl = sliderRef.current;
-      const slidesCount = sliderEl.children.length;
-      const maxMoveBy = (slidesCount - 1) * 100;
-
-      const infiniteLoop = () => {
-        if (moveBy >= maxMoveBy || moveBy < 0) {
-          sliderEl.style.transitionDuration = '0ms';
-          setDelayInfinityLoop(animationDelay);
-          setMoveBy(0);
-        } else if (moveBy === maxMoveBy - 100) {
-          setDelayInfinityLoop(animationDuration);
-          setMoveBy(moveBy + 100);
-        } else {
-          sliderEl.style.transitionDuration = `${animationDuration}ms`;
-          setDelayInfinityLoop(animationDelay);
-          setMoveBy(moveBy + 100);
-        }
-      };
-      interval = window.setInterval(infiniteLoop, delayInfinityLoop);
+    if (!isWorking) {
+      infiniteLoopRef = window.setInterval(
+        () => setSliderPos((prevState) => (prevState === maxSliderPos ? 0 : prevState - 100)),
+        animationDelay
+      );
     }
 
     return () => {
-      window.clearInterval(interval);
+      window.clearInterval(infiniteLoopRef);
     };
-  }, [moveBy, delayInfinityLoop]);
+  }, [isWorking, animationDelay]);
 
   useEffect(() => {
-    // update position of sliders wrapper
+    // update slider pos
     if (sliderRef.current) {
-      sliderRef.current.style.transform = `translateX(${-moveBy}vw)`;
+      sliderRef.current.style.transform = `translateX(${sliderPos}vw)`;
     }
-  }, [moveBy]);
+  }, [sliderPos]);
 
   return (
     <CarouselWrapper>
@@ -129,12 +84,6 @@ const Carousel = ({ slidersData, settings }: ICarouselProps) => {
             slideImage={slideImage}
           />
         ))}
-        <CarouselSlide
-          id={firstSlide.id}
-          title={firstSlide.title}
-          subtitle={firstSlide.subtitle}
-          slideImage={firstSlide.slideImage}
-        />
       </Slider>
     </CarouselWrapper>
   );
