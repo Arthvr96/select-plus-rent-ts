@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'gatsby';
 
 export const List = styled.ul`
   display: grid;
@@ -8,7 +9,7 @@ export const List = styled.ul`
   width: 100%;
 `;
 
-export const PriceBox = styled.button`
+export const PriceBox = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;

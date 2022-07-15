@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import InfoSection from 'components/organisms/InfoSection/InfoSection';
-import Footer from 'components/organisms/Footer/Footer';
+import { MemoInfoSection } from 'components/organisms/InfoSection/InfoSection';
+import { MemoFooter } from 'components/organisms/Footer/Footer';
 import { useIndexContext } from 'providers/IndexContextProvider';
 import { FixedSection } from './FixedFooterSections.style';
 import { ParallaxPlaceholder } from 'components/atoms/ParallaxPlaceholder/ParallaxPlaceholder';
@@ -41,8 +41,8 @@ const FixedFooterSections = ({ infoSectionBg, ids }: IFixedFooterSections) => {
       {isHideHero ? (
         <>
           <FixedSection ref={fixedSectionRef}>
-            <InfoSection srcBg={infoSectionBg.publicURL} />
-            <Footer />
+            <MemoInfoSection srcBg={infoSectionBg.publicURL} />
+            <MemoFooter />
           </FixedSection>
         </>
       ) : null}

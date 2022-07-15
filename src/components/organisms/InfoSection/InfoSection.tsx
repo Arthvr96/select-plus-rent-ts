@@ -37,4 +37,4 @@ const InfoSection = ({ srcBg }: IInfoSection) => {
   );
 };
 
-export default InfoSection;
+export const MemoInfoSection = React.memo(InfoSection);

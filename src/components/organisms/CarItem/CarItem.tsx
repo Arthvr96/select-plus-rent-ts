@@ -10,7 +10,9 @@ interface ICarItem {
   carData: ICar;
 }
 
-const CarItem = ({ carData: { carName, info, prices, shortDescription, gallery } }: ICarItem) => {
+const CarItem = ({
+  carData: { id, carName, info, prices, shortDescription, gallery },
+}: ICarItem) => {
   return (
     <Wrapper>
       <StyledImg image={gallery[0].gatsbyImageData} alt={gallery[0].alt} />
@@ -22,7 +24,7 @@ const CarItem = ({ carData: { carName, info, prices, shortDescription, gallery }
           {shortDescription}
         </Subtitle>
         <InfoList info={info} />
-        <PricesList prices={prices} />
+        <PricesList idCar={id} prices={prices} />
       </Content>
     </Wrapper>
   );

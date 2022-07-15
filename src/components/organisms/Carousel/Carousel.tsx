@@ -89,4 +89,4 @@ const Carousel = ({ slidersData, settings }: ICarouselProps) => {
   );
 };
 
-export default Carousel;
+export const MemoCarousel = React.memo(Carousel);

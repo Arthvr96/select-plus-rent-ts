@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { HeroSlides } from 'globalTypes';
-import Carousel from 'components/organisms/Carousel/Carousel';
+import { MemoCarousel } from 'components/organisms/Carousel/Carousel';
 import { Wrapper } from './Hero.style';
 import { useIndexContext } from 'providers/IndexContextProvider';
 import { ParallaxPlaceholder } from 'components/atoms/ParallaxPlaceholder/ParallaxPlaceholder';
@@ -27,7 +27,7 @@ const Hero = ({ slidersData, id }: IHeroType) => {
       <div id={id} />
       {!isHideHero ? (
         <Wrapper ref={wrapperRef}>
-          <Carousel
+          <MemoCarousel
             slidersData={slidersData}
             settings={{
               animationDuration: isMobile ? 400 : 700,
@@ -42,4 +42,4 @@ const Hero = ({ slidersData, id }: IHeroType) => {
   );
 };
 
-export default Hero;
+export const MemoizedHero = React.memo(Hero);

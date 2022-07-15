@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import { CarsData, HeroSlides } from 'globalTypes';
 import IndexTemplate from 'components/templates/IndexTemplate/IndexTemplate';
 import NavBar from 'components/organisms/NavBar/NavBar';
-import Hero from 'components/organisms/Hero/Hero';
+import { MemoizedHero } from 'components/organisms/Hero/Hero';
 import FeaturesList from 'components/organisms/FeaturesList/FeaturesList';
 import CarsList from 'components/organisms/CarsList/CarsList';
 import AdditionalServices from 'components/organisms/AdditionalServices/AdditionalServices';
@@ -23,7 +23,7 @@ const Index = ({ data: { heroSlides, carsData, infoSectionBg } }: IIndexData) =>
   return (
     <IndexTemplate>
       <NavBar />
-      <Hero id="home" slidersData={heroSlides} />
+      <MemoizedHero id="home" slidersData={heroSlides} />
       <FeaturesList />
       <CarsList id="offer" carsData={carsData} />
       <AdditionalServices />
